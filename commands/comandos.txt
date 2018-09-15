@@ -1,0 +1,19 @@
+Comandos de servidor 🛃:
+
+&ping - Ping atual.
+&serverinfo - Um pouco sobre o server 
+&level - O seu level no KalalhoBot
+&reports - Tem um cara que está quebrando regras? Use esse comando. Ex.: &reports @zuskinhaKrey ele foi desrespeitoso
+&ajudaVoice - Um pequeno tutorial de como usa-lo
+
+Brincadeira 🧙‍:
+
+&frita - Bora fritaaarrr iihhuu
+&troll - alooo Yetz
+&change - Alooo TT
+
+Música 🎼:
+
+&tocar - Para escolher uma Música. Ex.: &tocar drake it my feelings
+&pular - Para pular a música
+

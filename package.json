@@ -1,0 +1,25 @@
+{
+  "name": "TestBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord-anti-spam": "^1.1.2",
+    "discord-music-bot": "^2.3.0",
+    "discord.js": "^11.4.2",
+    "discord.js-musicbot-addon": "^12.0.6",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^4.0.0",
+    "node-opus": "^0.3.0",
+    "opusscript": "0.0.6",
+    "simple-youtube-api": "^5.0.2",
+    "yt-search": "^0.1.4"
+  }
+}
