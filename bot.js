@@ -152,7 +152,7 @@ client.on("message", async message => {
         .addField("Nível", lvlAtu +1)
         .setImage("https://i2.wp.com/blog.colodedeus.com.br/wp-content/uploads/2018/01/level-up-gif.gif")
         .setThumbnail(message.author.avatarURL);
-        client.channels.get("bot-spam").send(lvlUp);
+        client.channels.get("488857881157042176").send(lvlUp);
     }
     fs.writeFile("./xp.json", JSON.stringify(xp), (err) =>{
         if(err) console.log(err)
