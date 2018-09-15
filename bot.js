@@ -15,7 +15,8 @@ http.createServer(function (req, res) { res.writeHead(200, {'Content-Type': 'tex
 res.send('it is running\n'); }).listen(process.env.PORT || 5000);
 
 
-let statues = ['discord.gg/q9zpY3h  | Nosso servidor',`Eu estou em ${client.guilds.size} servidores`];
+let sizeGuild = client.guilds.size;
+let statues = ['discord.gg/q9zpY3h  | Nosso servidor',`Eu estou em ${sizeGuild} servidores`,"🛂 Ainda estou em obra(fase beta), então tenha paciência com os erros","&ajuda | Para saber os comandos. 👍"];
 
 
 
