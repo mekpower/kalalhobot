@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 module.exports.run = (client, message, args, ops) => {
 
     let botinfoEmbed = new Discord.RichEmbed()
@@ -10,6 +11,6 @@ module.exports.run = (client, message, args, ops) => {
     .addField("Programação", "<:nodejs:490597898812391424> Node.js", true)
     .addField("📆 Datas", `Entrei no ${message.guild.name}: \n ${client.guild.joinedAt}`, true)
 
-    
+    message.channel.send(botinfoEmbed);
 
 }

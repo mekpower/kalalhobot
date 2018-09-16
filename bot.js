@@ -16,14 +16,16 @@ res.send('it is running\n'); }).listen(process.env.PORT || 5000);
 
 
 
-let statues = ['discord.gg/q9zpY3h  | Nosso servidor',"🛂 Ainda estou em obra(fase beta), então tenha paciência com os erros","&ajuda | Para saber os comandos. 👍"];
+
 
 
 
 client.on("ready", () => {
     console.log(`Bot foi iniciado, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`);
     setInterval(function(){
-        statues += `Eu estou em ${client.guilds.size} servidores`;
+
+        let statues = ['discord.gg/q9zpY3h  | Nosso servidor',`Eu estou em ${client.guilds.size} servidores`,"🛂 Ainda estou em obra(fase beta), então tenha paciência com os erros","&ajuda | Para saber os comandos. 👍"];
+
         let status = statues[Math.floor(Math.random()*statues.length)];
         //bot.user.setGame(statues);
         client.user.setPresence({game: {name:status}, status: 'online'});
