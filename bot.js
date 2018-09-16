@@ -119,9 +119,13 @@ client.on("message", async message => {
     if(comando === "serverinfo"){
         
         var embed = new Discord.RichEmbed()
+        .setAuthor(message.guild.username, message.guild.iconURL)
         .setTitle("Server Info")
         .addField("Nome do Servidor", message.guild.name, true)
-        .addField("Total de Membros", message.guild.memberCount, true)
+        .addField("🤴 Dono(a) do Server", message.guild.owner, true)
+        .addField("👨‍👨‍👧‍👦 Total de Membros", message.guild.memberCount, true)
+        .addField("Canais", message.guild.channels.size)
+        
         
         .setColor(0x0FFFF)
         .setThumbnail(message.guild.iconURL)
