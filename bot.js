@@ -120,22 +120,6 @@ client.on("message", async message => {
         console.log(err.stack);
     }
 
-    if(comando === "serverinfo"){
-        
-        var embed = new Discord.RichEmbed()
-        .setAuthor(message.guild.name, message.guild.iconURL)
-        .setTitle("Server Info")
-        .addField("Nome do Servidor", message.guild.name, true)
-        .addField("🤴 Dono(a) do Server", message.guild.owner, true)
-        .addField("👨‍👨‍👧‍👦 Total de Membros", message.guild.memberCount, true)
-        .addField(":robot: Bots", message.guild.botCount, true)
-        .addField("💬 Canais", message.guild.channels.size)
-        
-        
-        .setColor(0x0FFFF)
-        .setThumbnail(message.guild.iconURL)
-        message.channel.sendEmbed(embed);
-    }
 
     let xpAdd = Math.floor(Math.random() * 7) + 8 ;
 
