@@ -149,7 +149,7 @@ client.on("message", async message => {
         let markCode = `\`\`\``;
         xp[message.author.id].level = xp[message.author.id].level +1;
         
-        client.channels.send(`${markCode}${author.username} subiu de nível, atualmente está lvl ${lvlAtu +1}${markCode}`);
+        client.channel.send(`${markCode}${author.username} subiu de nível, atualmente está lvl ${lvlAtu +1}${markCode}`);
     }
     fs.writeFile("./xp.json", JSON.stringify(xp), (err) =>{
         if(err) console.log(err)
