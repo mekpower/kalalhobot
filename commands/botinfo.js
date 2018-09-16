@@ -12,7 +12,7 @@ module.exports.run = (client, message, args, ops) => {
     .addField("👨‍👨‍👧‍👦 Meus amigos",` ${join}${client.users.size}${join} `,true)
     .addField("💬 Canais", ` ${join}${client.channels.size}${join} `,true)
     .addField("Linguagem", "<:nodejs:490597898812391424> Node.js", true)
-    .addField(":link: Links",` [**Site**](https://kalalhobot.glitch.me)`)
+    .addField(":link: Links",` [**Site**](https://kalalhobot.glitch.me)`);
 
     message.channel.sendEmbed(botinfoEmbed);
 

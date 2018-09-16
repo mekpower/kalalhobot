@@ -52,7 +52,7 @@ client.on("message", async message => {
     const args = message.content.slice(config.prefix.length).trim().split(' ');
     const comando = args.shift().toLowerCase();
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
-    let mentin = ['@Kalalho'];
+    let mentin = ['@Kalalho#0776'];
     let mentinText = false;
     let acheNoTexto = false;
 
