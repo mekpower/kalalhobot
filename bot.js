@@ -86,7 +86,7 @@ client.on("message", async message => {
     if(!reporUs) return message.channel.send("Não achei esse cabra, cadê ele??!!");
     let causa = args.join(" ").slice(22);
     
-    var i = 1;
+    var i = 0;
     let reportEmbed = new Discord.RichEmbed()
     
     .setTitle("Crucificado")
@@ -99,8 +99,8 @@ client.on("message", async message => {
     let resporCanal = message.guild.channels.find(`name`, "reports");
     if(!resporCanal) return message.channel.send("Não existe uma sala #reports");
 
-    message.channel.send("<a:load:488757308248293396> *Loading* | O meliante foi mandado para a sala de crucificação...");
-    resporCanal.send(reportEmbed).then(function (message) {
+    message.channel.send("<a:load:488757308248293396> **Loading** **|** O meliante foi mandado para a sala de crucificação...");
+    resporCanal.send(reportEmbed).then(async function (message) {
         message.react("<:correto:471853582740619284>")
         message.react("<:negado:487113617473273876>")
       }).catch(function() {
@@ -108,10 +108,10 @@ client.on("message", async message => {
        });
     
     do {
-        message.channel.send(`<:correto:471853582740619284> | O report de ${message.author.username} foi aceito, alguem vai ser crucificado`);
+        message.channel.send(`<:correto:471853582740619284> **|** O report de ${message.author.username} foi aceito, alguem vai ser crucificado`);
         message.channel.send("<:drakeBan:490596000084525080>");
       }
-    while (i !== 1 && reaction.emoji.name === "<:correto:471853582740619284>");
+    while ((i !== 0) && (reaction.emoji.name === "<:correto:471853582740619284>"));
     
     }
 
