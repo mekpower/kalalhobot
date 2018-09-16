@@ -12,7 +12,7 @@ module.exports.run = (client, message, args, ops) => {
     .addField("👨‍👨‍👧‍👦 Meus amigos", client.users.size,true)
     .addField("💬 Canais", client.channels.size,true)
     .addField("Programação", "<:nodejs:490597898812391424> Node.js", true)
-    .addField(" Datas:", ` Criado em: \n ${join}${message.clientUser.createdAt}${join} \n Entrei no *${message.guild.name}*: \n ${join}${client.guild.joinedAt}${join}`,true)
+    .addField(" Datas:", ` Entrei no *${guild.name}*: \n ${join}${client.guild.joinedAt}${join}`,true)
 
     message.channel.sendEmbed(botinfoEmbed);
 
