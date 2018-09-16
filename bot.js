@@ -146,15 +146,10 @@ client.on("message", async message => {
     let difference = nxtLvl - xpAtu;
     xp[message.author.id].xp= xpAtu +xpAdd;
     if(nxtLvl <= xp[message.author.id].xp){
+        let markCode = `\`\`\``;
         xp[message.author.id].level = xp[message.author.id].level +1;
-        let lvlUp = new Discord.RichEmbed()
-        .setTitle("Subiu de Nível!")
-        .setColor("#42f4d4")
-        .addField("User", message.author.username)
-        .addField("Nível", lvlAtu +1)
-        .setImage("https://i2.wp.com/blog.colodedeus.com.br/wp-content/uploads/2018/01/level-up-gif.gif")
-        .setThumbnail(message.author.avatarURL);
-        client.channels.get("488857881157042176").send(lvlUp);
+        
+        client.channels.send(`${markCode}${author.username} subiu de nível, atualmente está lvl ${lvlAtu +1}${markCode}`);
     }
     fs.writeFile("./xp.json", JSON.stringify(xp), (err) =>{
         if(err) console.log(err)
