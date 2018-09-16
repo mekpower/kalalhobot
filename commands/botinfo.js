@@ -5,7 +5,7 @@ module.exports.run = (client, message, args, ops) => {
     let botinfoEmbed = new Discord.RichEmbed()
 
     
-    .setAuthor("Kalalho", message.clientUser.avatarURL)
+    .setAuthor("Kalalho")
     .setColor("#ffe100")
     .addField("Soble min", "Koe, tlaquilo? Eu sou o Kalalho, um bot brasileiro sobre variadas coisas, criado pelo MekPower#6688")
     .addField("🌎 Servidores", client.guilds.size,true)
