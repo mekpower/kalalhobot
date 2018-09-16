@@ -52,6 +52,8 @@ client.on("message", async message => {
     const args = message.content.slice(config.prefix.length).trim().split(' ');
     const comando = args.shift().toLowerCase();
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
+    let mentin = ['@Kalalho'];
+    let mentinText = false;
     let acheNoTexto = false;
 
     for(var i in machis){
@@ -71,8 +73,11 @@ client.on("message", async message => {
         m.edit(`Pong! a latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${Math.round(client.ping)}ms`);
     }
 
-    if(message.guild.member(message.mentions.client)){
-        message.channel.send("Q foi?");
+    for(var i in mentin){
+        if(message.content.toLowerCase().includes(mentin[i].toLowerCase())) mentinText = true;
+    }
+    if(mentinText){
+        message.channel.send("Q foi kalalho?");
         message.channel.send("<a:AniPing:471788554142351391>");
     }
 
