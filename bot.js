@@ -71,6 +71,10 @@ client.on("message", async message => {
         m.edit(`Pong! a latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${Math.round(client.ping)}ms`);
     }
 
+    if(message.guild.member(message.mentions.client.first())){
+        message.channel.send("Q foi?");
+        message.channel.send("<a:AniPing:471788554142351391>");
+    }
 
     if(comando === "reports"){
         let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
