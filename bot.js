@@ -15,14 +15,15 @@ http.createServer(function (req, res) { res.writeHead(200, {'Content-Type': 'tex
 res.send('it is running\n'); }).listen(process.env.PORT || 5000);
 
 
-let sizeGuild = client.guilds.size;
-let statues = ['discord.gg/q9zpY3h  | Nosso servidor',`Eu estou em ${sizeGuild} servidores`,"🛂 Ainda estou em obra(fase beta), então tenha paciência com os erros","&ajuda | Para saber os comandos. 👍"];
+
+let statues = ['discord.gg/q9zpY3h  | Nosso servidor',"🛂 Ainda estou em obra(fase beta), então tenha paciência com os erros","&ajuda | Para saber os comandos. 👍"];
 
 
 
 client.on("ready", () => {
     console.log(`Bot foi iniciado, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`);
     setInterval(function(){
+        statues += `Eu estou em ${client.guilds.size} servidores`;
         let status = statues[Math.floor(Math.random()*statues.length)];
         //bot.user.setGame(statues);
         client.user.setPresence({game: {name:status}, status: 'online'});
@@ -86,6 +87,7 @@ client.on("message", async message => {
     let resporCanal = message.guild.channels.find(`name`, "reports");
     if(!resporCanal) return message.channel.send("Não existe uma sala #reports");
 
+    message.channel.send("<a:load:488757308248293396> *Loading* | O meliante foi mandado para a sala de crucificação...");
     resporCanal.send(reportEmbed);
 
     
@@ -119,12 +121,13 @@ client.on("message", async message => {
     if(comando === "serverinfo"){
         
         var embed = new Discord.RichEmbed()
-        .setAuthor(message.guild.username, message.guild.iconURL)
+        .setAuthor(message.guild.name, message.guild.iconURL)
         .setTitle("Server Info")
         .addField("Nome do Servidor", message.guild.name, true)
         .addField("🤴 Dono(a) do Server", message.guild.owner, true)
         .addField("👨‍👨‍👧‍👦 Total de Membros", message.guild.memberCount, true)
-        .addField("Canais", message.guild.channels.size)
+        .addField(":robot: Bots", message.guild.botCount, true)
+        .addField("💬 Canais", message.guild.channels.size)
         
         
         .setColor(0x0FFFF)
