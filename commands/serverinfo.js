@@ -16,7 +16,7 @@ module.exports.run = (client, message, args, ops) => {
         .addField("🤴 Dono(a) do Server", message.guild.owner.user.tag, true)
         .addField("👨‍👨‍👧‍👦 Total de Membros", message.guild.memberCount, true)
         .addField(":robot: Bots", checkBots(message.guild), true)
-        .addField("💬 Canais", message.guild.channels.size)
+        .addField("💬 Canais", message.guild.channels.size,true)
         .addField("🌎 Região", message.guild.region, true)
         
         
