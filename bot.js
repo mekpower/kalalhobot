@@ -53,7 +53,7 @@ client.on("guildDelete", guild =>{
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
     
     delete guildConf[guild.id]; // Deletes the Guild ID and Prefix
-     fs.writeFile('./storages/guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
+     fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
      	if (err) console.log(err)
 	})
 });
