@@ -108,7 +108,8 @@ client.on("message", async message => {
     resporCanal.send(reportEmbed).then(msg2 => {
         msg2.react('✅');
         msg2.react('❌');
-    const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '✅') || (r.emoji.name === '❌')) && (u.id !== client.user.id && u.id === message.author.id))
+    const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '✅') || (r.emoji.name === '❌'))
+    )
     collector.on("collect", r=>{
         switch (r.emoji.name) {
         case '✅': 
