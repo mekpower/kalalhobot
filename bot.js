@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+var guildConf = require("./guildConf.json");
 let xp = require("./xp.json");
 const fs = require("fs");
 var anti_spam = require("discord-anti-spam");
@@ -36,11 +37,25 @@ client.on("ready", () => {
 client.on("guildCreate", guild =>{
     console.log(`O bot entro no servidor: ${guild.name} (id: ${guild.id}). População: ${guild.memberCount} membros!`);
     client.user.setActivity(`Estou em ${client.guilds.size} servidores`);
+
+        if (!guildConf[guild.id]) {
+	        guildConf[guild.id] = {
+		    prefix: config.prefix
+        }
+    }
+    fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
+    if (err) console.log(err)
+    })
 });
 
 client.on("guildDelete", guild =>{
     console.log(`O bot foi deletado do servidor: ${guild.name} (id:${guild.id})`);
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
+    
+    delete guildConf[guild.id]; // Deletes the Guild ID and Prefix
+     fs.writeFile('./storages/guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
+     	if (err) console.log(err)
+	})
 });
 
 
@@ -51,8 +66,8 @@ client.on("message", async message => {
 
     
 
-    const args = message.content.slice(config.prefix.length).trim().split(' ');
-    const comando = args.shift().toLowerCase();
+    const args = message.content.split(' ').slice(1);
+    const comando = message.content.split(' ')[0].replace(guildConf[message.guild.id].prefix, '');
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
     let mentinText = false;
@@ -83,6 +98,16 @@ client.on("message", async message => {
         message.channel.send("<a:AniPing:471788554142351391>");
     }
 
+    if (comando === "prefix") {
+        guildConf[message.guild.id].prefix = args[0];
+        if (!guildConf[message.guild.id].prefix) {
+            guildConf[message.guild.id].prefix = config.prefix; // If you didn't specify a Prefix, set the Prefix to the Default Prefix
+        }
+         fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
+             if (err) console.log(err)
+        })
+      }
+
     if(comando === "reports"){
         let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!reporUs) return message.channel.send("Não achei esse cabra, cadê ele??!!");
@@ -102,9 +127,11 @@ client.on("message", async message => {
     if(!resporCanal) return message.channel.send("Não existe uma sala #reports");
 
     message.channel.send("<a:load:488757308248293396> **Loading** **|** O meliante foi mandado para a sala de crucificação...");
-    resporCanal.send(reportEmbed)
-        message.react(":white_check_mark:");
-        message.react(":negative_squared_cross_mark:");
+    resporCanal.send(reportEmbed).then(sentEmbed=> {
+    message.react("☑️")
+    message.react("❌")
+    })
+        
      
       while ((inb !== 0) && (reaction.emoji.name === "<:correto:471853582740619284>")){
         message.channel.send(`<:correto:471853582740619284> **|** O report de ${message.author.username} foi aceito, alguem vai ser crucificado`);

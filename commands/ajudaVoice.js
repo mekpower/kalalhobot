@@ -10,5 +10,5 @@ module.exports.run = (client, message, args, ops) => {
     .addField("3° Passo", "Está tudo prontoo! Agora basta falar com seus amigos!!")
     .setImage("https://i.imgur.com/rlJ0RcJ.png");
     
-    message.channel.sendEmbed(voiceEmbed);
+    message.channel.send(voiceEmbed);
 }
