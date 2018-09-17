@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-var config = require('./config.json');
-var guildConf = require('./guildConf.json');
+const config = require('./config.json');
 let xp = require("./xp.json");
 const fs = require("fs");
 var anti_spam = require("discord-anti-spam");
@@ -38,24 +37,13 @@ client.on("guildCreate", guild =>{
     console.log(`O bot entro no servidor: ${guild.name} (id: ${guild.id}). População: ${guild.memberCount} membros!`);
     client.user.setActivity(`Estou em ${client.guilds.size} servidores`);
 
-        if (!guildConf[guild.id]) {
-	        guildConf[guild.id] = {
-		    prefix: config.prefix
-        }
-    }
-    fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
-    if (err) console.log(err)
-    })
+        
 });
 
 client.on("guildDelete", guild =>{
     console.log(`O bot foi deletado do servidor: ${guild.name} (id:${guild.id})`);
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
     
-    delete guildConf[guild.id]; // Deletes the Guild ID and Prefix
-     fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
-     	if (err) console.log(err)
-	})
 });
 
 
@@ -66,8 +54,8 @@ client.on("message", async message => {
 
     
 
-    const args = message.content.split(' ').slice(1);
-    const comando = message.content.split(' ')[0].replace(guildConf[message.guild.id].prefix, '');
+    const args = message.content.slice(config.prefix.length).trim().split(' ');
+    const comando = args.shift().toLowerCase();
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
     let mentinText = false;
@@ -98,15 +86,6 @@ client.on("message", async message => {
         message.channel.send("<a:AniPing:471788554142351391>");
     }
 
-    if (comando === "prefix") {
-        guildConf[message.guild.id].prefix = args[0];
-        if (!guildConf[message.guild.id].prefix) {
-            guildConf[message.guild.id].prefix = config.prefix; // If you didn't specify a Prefix, set the Prefix to the Default Prefix
-        }
-         fs.writeFile('./guildConf.json', JSON.stringify(guildConf, null, 2), (err) => {
-             if (err) console.log(err)
-        })
-      }
 
     if(comando === "reports"){
         let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
