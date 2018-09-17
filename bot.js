@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const config = require('./config.json');
 let xp = require("./xp.json");
 const fs = require("fs");
-const db = require('quick.db');
+
 var anti_spam = require("discord-anti-spam");
 const token = process.env.token;
 
@@ -53,149 +53,141 @@ client.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type==="dm") return;
 
-    db.fetchObject(`GuildPrefix_${message.guild.id}`).then(ko =>{
 
-        let prefix;
-        if(ko.text){
-            prefix = ko.text
-        }else{
-            preifx = config.prefix
-        }
+    const args = message.content.slice(config.prefix.length).trim().split(" ");
+    const comando = args.shift().toLowerCase();
+    let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
+    let mentin = ['@Kalalho#0776'];
+    let mentinText = false;
+    let acheNoTexto = false;
 
-        const args = message.content.slice(config.prefix.length).trim().split(" ");
-        const comando = args.shift().toLowerCase();
-        let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
-        let mentin = ['@Kalalho#0776'];
-        let mentinText = false;
-        let acheNoTexto = false;
-
-        for(var i in machis){
-            if(message.content.toLowerCase().includes(machis[i].toLowerCase())) acheNoTexto = true;
-            
-        }
-
-        if(acheNoTexto){
-            message.channel.send('MACHIISSTAAA',{
-                file: "http://1.bp.blogspot.com/-WMforG0sFvo/VaFKsvFinfI/AAAAAAAAQa0/dZpdkIEKoxU/s1600/MACHISTAS%2BNAO%2BPASSARAO.JPG"} 
-            );
-        }
-
-
-        if(comando === "ping"){
-            const m = await message.channel.send("ping?");
-            m.edit(`Pong! a latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${Math.round(client.ping)}ms`);
-        }
-
-        for(var i in mentin){
-            if(message.content.toLowerCase().includes(mentin[i].toLowerCase())) mentinText = true;
-        }
-        if(mentinText){
-            message.channel.send("Q foi kalalho?");
-            message.channel.send("<a:AniPing:471788554142351391>");
-        }
-
-
-        if(comando === "reports"){
-            let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-        if(!reporUs) return message.channel.send("Não achei esse cabra, cadê ele??!!");
-        let causa = args.join(" ").slice(22);
+    for(var i in machis){
+        if(message.content.toLowerCase().includes(machis[i].toLowerCase())) acheNoTexto = true;
         
-        let reportEmbed = new Discord.RichEmbed()
+    }
+
+    if(acheNoTexto){
+        message.channel.send('MACHIISSTAAA',{
+            file: "http://1.bp.blogspot.com/-WMforG0sFvo/VaFKsvFinfI/AAAAAAAAQa0/dZpdkIEKoxU/s1600/MACHISTAS%2BNAO%2BPASSARAO.JPG"} 
+        );
+    }
+
+
+    if(comando === "ping"){
+        const m = await message.channel.send("ping?");
+        m.edit(`Pong! a latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${Math.round(client.ping)}ms`);
+    }
+
+    for(var i in mentin){
+        if(message.content.toLowerCase().includes(mentin[i].toLowerCase())) mentinText = true;
+    }
+    if(mentinText){
+        message.channel.send("Q foi kalalho?");
+        message.channel.send("<a:AniPing:471788554142351391>");
+    }
+
+
+    if(comando === "reports"){
+        let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+    if(!reporUs) return message.channel.send("Não achei esse cabra, cadê ele??!!");
+    let causa = args.join(" ").slice(22);
+    
+    let reportEmbed = new Discord.RichEmbed()
+    
+    .setTitle("Crucificado")
+    .setColor("#f46841")
+    .addField("Usuário crucificado",`${reporUs}, ID do usuário ${message.author.id}`)
+    .addField("Canal", message.channel)
+    .addField("Data", message.createdAt)
+    .addField("Motivo", causa);
+
+    let resporCanal = message.guild.channels.find(`name`, "reports");
+    if(!resporCanal) return message.channel.send("Não existe uma sala #reports");
+
+    message.channel.send("<a:load:488757308248293396> **Loading** **|** O meliante foi mandado para a sala de crucificação...");
+    resporCanal.send(reportEmbed).then(msg2 => {
+        msg2.react('✅');
+        msg2.react('❌');
+    const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '✅') || (r.emoji.name === '❌')) && (u.id !== client.user.id))
+    collector.on("collect", r=>{
+        switch (r.emoji.name) {
+        case '✅': 
+        message.channel.send(`<:correto:471853582740619284> **|** O report de **${message.author.username}** foi aceito, alguem vai ser crucificado`)
+        break;
+        case '❌':
+        message.channel.send(`<:negado:487113617473273876> **|** O report de **${message.author.username}** não foi aceito, sem crucificamentos por hj`)
+        }
+        })
+    }) 
+    
+    }
+
+    let responseObject = {
+        //Coloque todos os comandos simples de resposta aqui
+        "&change": "Change o que mano?"
+    }
+
+    if(responseObject[message.content]){
+        //Todas as mensagens simples do responseObject seram mandadas por esse if
+        message.channel.send(responseObject[message.content]);
+    }
+
+
+    try{
         
-        .setTitle("Crucificado")
-        .setColor("#f46841")
-        .addField("Usuário crucificado",`${reporUs}, ID do usuário ${message.author.id}`)
-        .addField("Canal", message.channel)
-        .addField("Data", message.createdAt)
-        .addField("Motivo", causa);
+        let ops = {
+            ownerID: ownerID,
+            active: active
+        }
 
-        let resporCanal = message.guild.channels.find(`name`, "reports");
-        if(!resporCanal) return message.channel.send("Não existe uma sala #reports");
+        let arqComando = require(`./commands/${comando}.js`);
+        arqComando.run(client, message, args, ops);
 
-        message.channel.send("<a:load:488757308248293396> **Loading** **|** O meliante foi mandado para a sala de crucificação...");
-        resporCanal.send(reportEmbed).then(msg2 => {
-            msg2.react('✅');
-            msg2.react('❌');
-        const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '✅') || (r.emoji.name === '❌')) && (u.id !== client.user.id))
-        collector.on("collect", r=>{
-            switch (r.emoji.name) {
-            case '✅': 
-            message.channel.send(`<:correto:471853582740619284> **|** O report de **${message.author.username}** foi aceito, alguem vai ser crucificado`)
-            break;
-            case '❌':
-            message.channel.send(`<:negado:487113617473273876> **|** O report de **${message.author.username}** não foi aceito, sem crucificamentos por hj`)
-            }
-            })
-        }) 
+    }catch(err){
+        console.log(err.stack);
+    }
+
+
+    let xpAdd = Math.floor(Math.random() * 7) + 8 ;
+
+    if(!xp[message.author.id]){
+        xp[message.author.id] = {
+            xp: 0,
+            level: 1
+        };
+    }
+    
+    
+    let xpAtu = xp[message.author.id].xp;
+    let lvlAtu = xp[message.author.id].level;
+    let nxtLvl = xp[message.author.id].level *300;
+    let difference = nxtLvl - xpAtu;
+    xp[message.author.id].xp= xpAtu +xpAdd;
+    if(nxtLvl <= xp[message.author.id].xp){
+        let markCode = `\`\`\``;
+        xp[message.author.id].level = xp[message.author.id].level +1;
         
-        }
+        message.channel.send(`${markCode}${author.username} subiu de nível, atualmente está lvl ${lvlAtu +1}${markCode}`);
+    }
+    fs.writeFile("./xp.json", JSON.stringify(xp), (err) =>{
+        if(err) console.log(err)
 
-        let responseObject = {
-            //Coloque todos os comandos simples de resposta aqui
-            "&change": "Change o que mano?"
-        }
+    });
 
-        if(responseObject[message.content]){
-            //Todas as mensagens simples do responseObject seram mandadas por esse if
-            message.channel.send(responseObject[message.content]);
-        }
+    if(comando === "level"){
+        let lvlEmbed = new Discord.RichEmbed()
+        .setAuthor(message.author.username)
+        .addField("Nível", lvlAtu, true)
+        .addField("XP", xpAtu, true)
+        .setColor("#f4eb42")
+        .setThumbnail(message.author.avatarURL)
+        .setFooter(`${difference} XP para subir de nível`, message.author.displayAvatarURL);
 
-
-        try{
-            
-            let ops = {
-                ownerID: ownerID,
-                active: active
-            }
-
-            let arqComando = require(`./commands/${comando}.js`);
-            arqComando.run(client, message, args, ops);
-
-        }catch(err){
-            console.log(err.stack);
-        }
+        message.channel.sendEmbed(lvlEmbed);
+      }
 
 
-        let xpAdd = Math.floor(Math.random() * 7) + 8 ;
-
-        if(!xp[message.author.id]){
-            xp[message.author.id] = {
-                xp: 0,
-                level: 1
-            };
-        }
-        
-        
-        let xpAtu = xp[message.author.id].xp;
-        let lvlAtu = xp[message.author.id].level;
-        let nxtLvl = xp[message.author.id].level *300;
-        let difference = nxtLvl - xpAtu;
-        xp[message.author.id].xp= xpAtu +xpAdd;
-        if(nxtLvl <= xp[message.author.id].xp){
-            let markCode = `\`\`\``;
-            xp[message.author.id].level = xp[message.author.id].level +1;
-            
-            message.channel.send(`${markCode}${author.username} subiu de nível, atualmente está lvl ${lvlAtu +1}${markCode}`);
-        }
-        fs.writeFile("./xp.json", JSON.stringify(xp), (err) =>{
-            if(err) console.log(err)
-
-        });
-
-        if(comando === "level"){
-            let lvlEmbed = new Discord.RichEmbed()
-            .setAuthor(message.author.username)
-            .addField("Nível", lvlAtu, true)
-            .addField("XP", xpAtu, true)
-            .setColor("#f4eb42")
-            .setThumbnail(message.author.avatarURL)
-            .setFooter(`${difference} XP para subir de nível`, message.author.displayAvatarURL);
-
-            message.channel.sendEmbed(lvlEmbed);
-        }
-
-
-    })   
+      
 });
     
         
