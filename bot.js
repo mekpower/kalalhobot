@@ -58,7 +58,7 @@ client.on("message", async message => {
     }
     let prefix = prefixies[message.guild.id].prefixes;
 
-    const args = message.content.slice(prefix.length).trim().split(' ');
+    const args = message.content.slice(config.prefix.length).trim().split(' ');
     const comando = args.shift().toLowerCase();
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
