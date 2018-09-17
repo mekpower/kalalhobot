@@ -49,7 +49,16 @@ client.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type==="dm") return;
 
-    const args = message.content.slice(config.prefix.length).trim().split(' ');
+    let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+
+    if(!prefixes[message.guild.id]){
+        prefixes[message.guild.id] = {
+            prefixes: config.prefix
+        };
+    }
+    let prefix = prefixies[message.guild.id].prefixes;
+
+    const args = message.content.slice(prefix.length).trim().split(' ');
     const comando = args.shift().toLowerCase();
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
@@ -100,17 +109,14 @@ client.on("message", async message => {
     if(!resporCanal) return message.channel.send("Não existe uma sala #reports");
 
     message.channel.send("<a:load:488757308248293396> **Loading** **|** O meliante foi mandado para a sala de crucificação...");
-    resporCanal.send(reportEmbed).then(async function (message) {
+    resporCanal.send(reportEmbed)
         message.react(":white_check_mark:");
         message.react(":negative_squared_cross_mark:");
-      }).catch(function() {
-        message.channel.get('487642152986345472').send("Não consegui enviar");
-       });
-    
-    do {
+     
+      while ((inb !== 0) && (reaction.emoji.name === "<:correto:471853582740619284>")){
         message.channel.send(`<:correto:471853582740619284> **|** O report de ${message.author.username} foi aceito, alguem vai ser crucificado`);
         message.channel.send("<:drakeBan:490596000084525080>");
-      }while ((inb !== 0) && (reaction.emoji.name === "<:correto:471853582740619284>"));
+      }
     
     }
 
