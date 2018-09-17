@@ -106,10 +106,16 @@ client.on("message", async message => {
     if(!resporCanal) return message.channel.send("Não existe uma sala #reports");
 
     message.channel.send("<a:load:488757308248293396> **Loading** **|** O meliante foi mandado para a sala de crucificação...");
-    resporCanal.send(reportEmbed).then(sentEmbed=> {
-    message.react("☑️")
-    message.react("❌")
-    })
+    resporCanal.send(reportEmbed).then(msg2 => {
+        msg2.react('✅');
+    const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '💀') && (u.id !== client.user.id && u.id === msg.author.id))
+    collector.on("collect", r=>{
+        switch (r.emoji.name) {
+        case '✅': 
+        message.author.send(`<:correto:471853582740619284> **|** O report de ${message.author.username} foi aceito, alguem vai ser crucificado`)
+        }
+        })
+    }) 
         
      
       while ((inb !== 0) && (reaction.emoji.name === "<:correto:471853582740619284>")){
