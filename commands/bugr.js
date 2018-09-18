@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 module.exports.run = (client, message, args) =>{
 
     var bug = args.slice(0).join(" ")
