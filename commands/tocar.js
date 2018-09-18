@@ -23,26 +23,24 @@ exports.run = (client, message, args, ops) => {
 
         collector.videos = videos;
 
-        
+
         collector.once('collect', function(m){
-            message.channel.send(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username).then(msg2 => {
-                msg2.react('▶')
-                msg2.react('⏸')
+            const edi = await message.channel.send(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username).then(msg2 => {
+                msg2.react('🔁')
                 msg2.react('491460304581033985');
-                const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '▶') || (r.emoji.name === '⏸') || (r.emoji.name === '491460304581033985')) && (u.id !== client.user.id))
+                const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '🔁') || (r.emoji.name === '491460304581033985')) && (u.id !== client.user.id))
                 collector.on("collect", r=>{
                 switch (r.emoji.name) {
-                case '▶': 
+                case '🔁': 
                 let commandPlay = require(`./play.js`);
                     commandPlay.run(client, message, [this.videos[parseInt(m.content)-1].url]);
-                break;
-                case '⏸':
-                let commandParar = require(`./parar.js`);
-                    commandParar.run(client, message, args);
+                    edi.edit(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username);
                 break;
                 case '491460304581033985':
-                let commandPular = require(`./pular.js`);
-                    commandPular.run(client, message, args);
+                let commandParar = require(`./parar.js`);
+                    commandParar.run(client, message, args);
+                    edi.edit(`<:exit:491460304581033985> | Dando o daleste. Musica tocada: \`${videos[m-1].title}\``);
+                break;
                 }
                 })
             }) 
