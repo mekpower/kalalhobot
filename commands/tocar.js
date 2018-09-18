@@ -25,7 +25,7 @@ exports.run = (client, message, args, ops) => {
 
 
         collector.once('collect', function(m){
-            const edi = await message.channel.send(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username).then(msg2 => {
+            message.channel.send(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username).then(msg2 => {
                 msg2.react('🔁')
                 msg2.react('491460304581033985');
                 const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '🔁') || (r.emoji.name === '491460304581033985')) && (u.id !== client.user.id))
@@ -34,12 +34,12 @@ exports.run = (client, message, args, ops) => {
                 case '🔁': 
                 let commandPlay = require(`./play.js`);
                     commandPlay.run(client, message, [this.videos[parseInt(m.content)-1].url]);
-                    edi.edit(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username);
+                    message.author.edit(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username);
                 break;
                 case '491460304581033985':
                 let commandParar = require(`./parar.js`);
                     commandParar.run(client, message, args);
-                    edi.edit(`<:exit:491460304581033985> | Dando o daleste. Musica tocada: \`${videos[m-1].title}\``);
+                    message.author.edit(`<:exit:491460304581033985> | Dando o daleste. Musica tocada: \`${videos[m-1].title}\``);
                 break;
                 }
                 })
