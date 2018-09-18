@@ -54,7 +54,7 @@ client.on("message", async message => {
     if(message.channel.type==="dm") return;
 
 
-    const args = message.content.slice(config.prefix.length).trim().split(" ");
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const comando = args.shift().toLowerCase();
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
@@ -165,7 +165,7 @@ client.on("message", async message => {
     xp[message.author.id].xp= xpAtu +xpAdd;
     if(nxtLvl <= xp[message.author.id].xp){
         let markCode = `\`\`\``;
-        xp[message.author.id].level = xp[message.author.id].level +1;
+        xp[message.author.id].level = lvlAtu +1;
         
         message.channel.send(`${markCode}${author.username} subiu de nível, atualmente está lvl ${lvlAtu +1}${markCode}`);
     }

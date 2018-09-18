@@ -1,12 +1,12 @@
 Comandos de servidor 🛃:
 
-`ping` `serverinfo` `level` `reports` `bugr` `botinfo`
+`ping` , `serverinfo` , `level` , `reports` , `bugr` , `botinfo`
 
 Aleatórios 🧙‍:
 
-`frita` `troll` `change` `frita`
+`frita` , `troll` , `change` , `frita`
 
 Música 🎼:
 
-`tocar` `pular`
+`tocar` , `pular`
 
