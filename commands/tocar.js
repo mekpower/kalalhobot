@@ -25,15 +25,15 @@ exports.run = (client, message, args, ops) => {
 
         collector.once('collect', function(m){
             message.channel.send(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username).then(msg2 => {
-                msg2.react('▶');
-                msg2.react('⏸');
+                msg2.react('▶')
+                msg2.react('⏸')
                 msg2.react('491460304581033985');
                 const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '▶') || (r.emoji.name === '⏸') || (r.emoji.name === '491460304581033985')) && (u.id !== client.user.id))
                 collector.on("collect", r=>{
                 switch (r.emoji.name) {
                 case '▶': 
                 let commandPlay = require(`./play.js`);
-                    commandPlay.run(client, message, args);
+                    commandPlay.run(client, message, [this.videos[parseInt(m.content)-1].url]);
                 break;
                 case '⏸':
                 let commandParar = require(`./parar.js`);
