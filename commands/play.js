@@ -13,7 +13,7 @@ function play(connection, message) {
 
 }
 var servers = {};
-module.exports.run = (bot, message, args, ops) => {
+module.exports.run = (client, message, args, ops) => {
   //play
   if (!args[0]) {
        message.channel.send(" :o: Coloca o link da musica men");

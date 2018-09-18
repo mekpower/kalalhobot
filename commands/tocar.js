@@ -33,15 +33,15 @@ exports.run = (client, message, args, ops) => {
                 switch (r.emoji.name) {
                 case '▶': 
                 let commandPlay = require(`./play.js`);
-                    commandPlay.run();
+                    commandPlay.run(client, message, args);
                 break;
                 case '⏸':
                 let commandParar = require(`./parar.js`);
-                    commandParar.run();
+                    commandParar.run(client, message, args);
                 break;
                 case '491460304581033985':
                 let commandPular = require(`./pular.js`);
-                    commandPular.run();
+                    commandPular.run(client, message, args);
                 }
                 })
             }) 
