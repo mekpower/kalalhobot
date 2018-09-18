@@ -23,6 +23,7 @@ exports.run = (client, message, args, ops) => {
 
         collector.videos = videos;
 
+        
         collector.once('collect', function(m){
             message.channel.send(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username).then(msg2 => {
                 msg2.react('▶')
