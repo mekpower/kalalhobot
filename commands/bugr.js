@@ -1,7 +1,7 @@
 module.exports.run = (client, message, args) =>{
 
     var bug = args.slice(0).join(" ")
-    if(!rbug) return message.reply("escreva sua sugestão")
+    if(!bug) return message.reply("Para usar: bugr <comando> <problema do comando>")
     
     let bugrEmbed = new Discord.RichEmbed()
     
