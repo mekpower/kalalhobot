@@ -5,10 +5,12 @@ let xp = require("./xp.json");
 const fs = require("fs");
 const sql = require("sqlite");
 sql.open("./score.sqlite");
+const osu = require('node-osu');
 
 var anti_spam = require("discord-anti-spam");
 const token = process.env.token;
 const pasSQL = process.env.pasSQL;
+const osuAPIkey = process.env.osuAPI;
 
 const ownerID = '483124757181497347';
 const active = new Map();
@@ -18,7 +20,12 @@ var http = require('http');
 http.createServer(function (req, res) { res.writeHead(200, {'Content-Type': 'text/plain'});
 res.send('it is running\n'); }).listen(process.env.PORT || 5000);
 
+var osuApi = new osu.Api(osuAPIkey, {
 
+    notFoundAsError: true,
+
+    completeScores: false
+})
 
 
 
