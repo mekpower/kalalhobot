@@ -3,9 +3,11 @@ const client = new Discord.Client();
 const config = require('./config.json');
 let xp = require("./xp.json");
 const fs = require("fs");
+const mysql = require("mysql");
 
 var anti_spam = require("discord-anti-spam");
 const token = process.env.token;
+const pasSQL = process.env.pasSQL;
 
 const ownerID = '483124757181497347';
 const active = new Map();
@@ -14,8 +16,6 @@ const bot = new Discord.Client({disableEveryone: true});
 var http = require('http'); 
 http.createServer(function (req, res) { res.writeHead(200, {'Content-Type': 'text/plain'});
 res.send('it is running\n'); }).listen(process.env.PORT || 5000);
-
-
 
 
 
@@ -48,11 +48,50 @@ client.on("guildDelete", guild =>{
 });
 
 
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    passaword: pasSQL,
+    database: "sadb"
+});
+
+con.connect(err =>{
+    if (err) throw err;
+    console.log("conectado ao database");
+});
+
+function generateXp(){
+    let min = 3;
+    let max = 12;
+
+    return Math.floor(Math.random()* (max - min + 1)) + min;
+}
 
 client.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type==="dm") return;
 
+    con.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) =>{
+        if(err) throw err;
+        let markCode = `\`\`\``;
+        let sql;
+        if(rows.length < 1){
+            sql = `INSERT INTO xp (id, xp, level) VALUES ('${message.author.id}', ${generateXp()}, 1)`;
+        }else{
+            let xp = rows[0].xp;
+            
+            sql = `UPDATE xp SET xp =  ${xp + generateXp()} WHERE id = '${message.author.id}'`;
+            
+        }
+        let level = rows[0].level;
+        let proxLvl = xp *300;
+        if(proxLvl <= xp){
+            sql = `UPDATE xp SET xp =  ${xp + generateXp()} level = ${level+1} WHERE id = '${message.author.id}'`;
+            message.channel.send(`${markCode}${message.author.username} subiu de nível, atualmente está lvl ${level+1}${markCode}`);
+        }
+
+        con.query(sql);
+    });
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const comando = args.shift().toLowerCase();
@@ -141,38 +180,14 @@ client.on("message", async message => {
         }
 
         let arqComando = require(`./commands/${comando}.js`);
-        arqComando.run(client, message, args, ops);
+        arqComando.run(client, message, args, con);
 
     }catch(err){
         console.log(err.stack);
     }
 
 
-    let xpAdd = Math.floor(Math.random() * 7) + 8 ;
-
-    if(!xp[message.author.id]){
-        xp[message.author.id] = {
-            xp: 0,
-            level: 1
-        };
-    }
     
-    
-    let xpAtu = xp[message.author.id].xp;
-    let lvlAtu = xp[message.author.id].level;
-    let nxtLvl = xp[message.author.id].level *300;
-    let difference = nxtLvl - xpAtu;
-    xp[message.author.id].xp= xpAtu +xpAdd;
-    if(nxtLvl <= xp[message.author.id].xp){
-        let markCode = `\`\`\``;
-        xp[message.author.id].level = lvlAtu +1;
-        
-        message.channel.send(`${markCode}${author.username} subiu de nível, atualmente está lvl ${lvlAtu +1}${markCode}`);
-    }
-    fs.writeFile("./xp.json", JSON.stringify(xp), (err) =>{
-        if(err) console.log(err)
-
-    });
 
     if(comando === "level"){
         let lvlEmbed = new Discord.RichEmbed()

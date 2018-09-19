@@ -6,7 +6,17 @@ const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
 const comando = args.shift().toLowerCase();
 
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, con) => {
+
+  let targ = message.mentions.users.first() || message.guild.members.get(args[1]) || message.author;
+
+  con.query(`SELECT * FROM xp WHERE id = '${targ.id}'`, (err, rows) => {
+    if(err) throw err;
+
+    if(!rows[0]) return message.channel.send("Esse usuario não tem XP");
+    let xp = rows[0].xp;
+    message.channel.send(xp);
+  })
 
   if(!xp[message.author.id]){
    xp[message.author.id] = {

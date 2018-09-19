@@ -17,6 +17,7 @@
     "discord.js-musicbot-addon": "^12.0.6",
     "ffmpeg": "0.0.4",
     "ffmpeg-binaries": "^4.0.0",
+    "mysql": "^2.16.0",
     "node-opus": "^0.3.0",
     "opusscript": "0.0.6",
     "simple-youtube-api": "^5.0.2",
