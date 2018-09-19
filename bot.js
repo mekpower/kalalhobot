@@ -51,7 +51,7 @@ client.on("guildDelete", guild =>{
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    passaword: pasSQL,
+    passaword: "kalalhosql",
     database: "sadb"
 });
 
