@@ -48,52 +48,13 @@ client.on("guildDelete", guild =>{
 });
 
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    passaword: "kalalhosql",
-    database: "sadb"
-});
 
-con.connect(err =>{
-    if (err) console.log(err);
-    console.log("conectado ao database");
-});
-
-function generateXp(){
-    let min = 3;
-    let max = 12;
-
-    return Math.floor(Math.random()* (max - min + 1)) + min;
-}
 
 client.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type==="dm") return;
 
-    con.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) =>{
-        if(err) console.log(err);
-        let markCode = `\`\`\``;
-        
-        let sql;
-        
-        if(rows.length < 1){
-            sql = `INSERT INTO xp (id, xp, level) VALUES ('${message.author.id}', ${generateXp()}, 1)`;
-        }else{
-            let xp = rows[0].xp;
-            
-            sql = `UPDATE xp SET xp =  ${xp + generateXp()} WHERE id = '${message.author.id}'`;
-            
-        }
-        let level = rows[0].level;
-        let proxLvl = xp *300;
-        if(proxLvl <= xp){
-            sql = `UPDATE xp SET xp =  ${xp + generateXp()} level = ${level+1} WHERE id = '${message.author.id}'`;
-            message.channel.send(`${markCode}${message.author.username} subiu de nível, atualmente está lvl ${level+1}${markCode}`);
-        }
-
-        con.query(sql);
-    });
+    
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const comando = args.shift().toLowerCase();
