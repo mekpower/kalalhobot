@@ -58,6 +58,7 @@ client.on("message", async message => {
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const comando = args.shift().toLowerCase();
+    let markCode = `\`\`\``;
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
     let mentinText = false;
@@ -82,7 +83,7 @@ client.on("message", async message => {
           if (curLevel > row.level) {
             row.level = curLevel;
             sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-            message.reply(`Você upou para o lvl **${curLevel}**! `);
+            message.reply(`<:lvlUp:491959868937207810> Você upou para o lvl **${curLevel}**! `);
           }
           sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
         }
@@ -146,14 +147,14 @@ client.on("message", async message => {
 
     if (comando === "level") {
         sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-          if (!row) return message.reply("Your current level is 0");
-          message.reply(`Your current level is ${row.level}`);
+          if (!row) return message.reply("<:lvl:491961992110931969> seu lvl atual é 0");
+          message.reply(`<:lvl:491961992110931969> seu lvl atual é ${row.level}`);
         });
       }
       if (comando === "xp") {
         sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-          if (!row) return message.reply("sadly you do not have any points yet!");
-          message.reply(`you currently have ${row.points} points, good going!`);
+          if (!row) return message.reply("você não tem pontos ainda <:FeelsBadMan:439756675583311872>");
+          message.reply(`você tem ${row.points} xp, goodi jobi <:PepeBebendoCafe:469880805624119327>`);
         });
       }
 
