@@ -189,18 +189,7 @@ client.on("message", async message => {
 
     
 
-    if(comando === "level"){
-        let lvlEmbed = new Discord.RichEmbed()
-        .setAuthor(message.author.username)
-        .addField("Nível", lvlAtu, true)
-        .addField("XP", xpAtu, true)
-        .setColor("#f4eb42")
-        .setThumbnail(message.author.avatarURL)
-        .setFooter(`${difference} XP para subir de nível`, message.author.displayAvatarURL);
-
-        message.channel.sendEmbed(lvlEmbed);
-      }
-
+    
 
       
 });
