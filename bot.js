@@ -38,7 +38,7 @@ client.on("ready", () => {
 client.on("guildCreate", guild =>{
     console.log(`O bot entro no servidor: ${guild.name} (id: ${guild.id}). População: ${guild.memberCount} membros!`);
     client.user.setActivity(`Estou em ${client.guilds.size} servidores`);
-
+    client.guilds.get("486292763667726337").channels.get("491968955704016906").send(`O bot entro no servidor: ${guild.name} (id: ${guild.id}). População: ${guild.memberCount} membros!`);
         
 });
 
