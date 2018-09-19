@@ -150,11 +150,11 @@ client.on("message", async message => {
           if (!row) return message.reply("Your current level is 0");
           message.reply(`Your current level is ${row.level}`);
         });
-      } else
+      } else{}
 
     let responseObject = {
         //Coloque todos os comandos simples de resposta aqui
-        "&change": "Change o que mano?"
+        "change": "Change o que mano?"
     }
 
     if(responseObject[message.content]){
