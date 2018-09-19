@@ -3,7 +3,8 @@ const client = new Discord.Client();
 const config = require('./config.json');
 let xp = require("./xp.json");
 const fs = require("fs");
-const mysql = require("mysql");
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 
 var anti_spam = require("discord-anti-spam");
 const token = process.env.token;
@@ -53,7 +54,7 @@ client.on("guildDelete", guild =>{
 client.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type==="dm") return;
-
+    if (!message.content.startsWith(config.prefix)) return;
     
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -74,8 +75,28 @@ client.on("message", async message => {
         );
     }
 
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+        if (!row) {
+          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+        } else {
+          let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
+          if (curLevel > row.level) {
+            row.level = curLevel;
+            sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
+            message.reply(`Você upou para o lvl **${curLevel}**! `);
+          }
+          sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
+        }
+      }).catch(() => {
+        console.error;
+        sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+        });
+      });
+    
 
-    if(comando === "ping"){
+
+    if(message.content.startsWith(prefix + "ping")){
         const m = await message.channel.send("ping?");
         m.edit(`Pong! a latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${Math.round(client.ping)}ms`);
     }
@@ -89,7 +110,7 @@ client.on("message", async message => {
     }
 
 
-    if(comando === "reports"){
+    if(message.content.startsWith(prefix + "reports")){
         let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!reporUs) return message.channel.send("Não achei esse cabra, cadê ele??!!");
     let causa = args.join(" ").slice(22);
@@ -123,6 +144,13 @@ client.on("message", async message => {
     }) 
     
     }
+
+    if (message.content.startsWith(prefix + "level")) {
+        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+          if (!row) return message.reply("Your current level is 0");
+          message.reply(`Your current level is ${row.level}`);
+        });
+      } else
 
     let responseObject = {
         //Coloque todos os comandos simples de resposta aqui
