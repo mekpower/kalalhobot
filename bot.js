@@ -56,7 +56,7 @@ var con = mysql.createConnection({
 });
 
 con.connect(err =>{
-    if (err) throw err;
+    if (err) console.log(err);
     console.log("conectado ao database");
 });
 
@@ -72,7 +72,7 @@ client.on("message", async message => {
     if(message.channel.type==="dm") return;
 
     con.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) =>{
-        if(err) throw err;
+        if(err) console.log(err);
         let markCode = `\`\`\``;
         let sql;
         if(rows.length < 1){
