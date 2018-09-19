@@ -54,7 +54,6 @@ client.on("guildDelete", guild =>{
 client.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type==="dm") return;
-    if (!message.content.startsWith(config.prefix)) return;
     
 
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -96,7 +95,7 @@ client.on("message", async message => {
     
 
 
-    if(message.content.startsWith(prefix + "ping")){
+    if(comando === "ping"){
         const m = await message.channel.send("ping?");
         m.edit(`Pong! a latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${Math.round(client.ping)}ms`);
     }
@@ -110,7 +109,7 @@ client.on("message", async message => {
     }
 
 
-    if(message.content.startsWith(prefix + "reports")){
+    if(comando === "reports"){
         let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!reporUs) return message.channel.send("Não achei esse cabra, cadê ele??!!");
     let causa = args.join(" ").slice(22);
@@ -145,7 +144,7 @@ client.on("message", async message => {
     
     }
 
-    if (message.content.startsWith(prefix + "level")) {
+    if (comando === "level") {
         sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
           if (!row) return message.reply("Your current level is 0");
           message.reply(`Your current level is ${row.level}`);
