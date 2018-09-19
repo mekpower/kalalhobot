@@ -149,7 +149,13 @@ client.on("message", async message => {
           if (!row) return message.reply("Your current level is 0");
           message.reply(`Your current level is ${row.level}`);
         });
-      } else{}
+      }
+      if (comando === "xp") {
+        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+          if (!row) return message.reply("sadly you do not have any points yet!");
+          message.reply(`you currently have ${row.points} points, good going!`);
+        });
+      }
 
     let responseObject = {
         //Coloque todos os comandos simples de resposta aqui
