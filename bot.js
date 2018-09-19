@@ -143,7 +143,7 @@ client.on("message", async message => {
         }
 
         let arqComando = require(`./commands/${comando}.js`);
-        arqComando.run(client, message, args, con);
+        arqComando.run(client, message, args);
 
     }catch(err){
         console.log(err.stack);
