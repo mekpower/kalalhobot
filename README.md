@@ -16,6 +16,6 @@ Kalalho é um bot discord brasileiro que usa discord.js como base. Ele tem funç
 
 Você pode ajudar doando direto no Paypal! Por enquanto só temos essa opção, talvez adicione um Patreon. 🤷
 
-## Liçensa
+## Licença
 
 Meu criador é o MekPower
