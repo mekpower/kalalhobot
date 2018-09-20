@@ -37,9 +37,8 @@ exports.run = (client, message, args, ops) => {
                     message.edit(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username);
                 break;
                 case '⏩':
-                let commandParar = require(`./parar.js`);
+                let commandParar = require(`./pular.js`);
                     commandParar.run(client, message, args);
-                    message.edit(`<:ExitSign:492205962401284096> | Dando o daleste. Musica tocada: \`${videos[m-1].title}\``);
                     break;
                 case 'adsdsa':
                 let commandP = require(`./pular.js`);

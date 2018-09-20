@@ -1,10 +1,10 @@
 Comandos de servidor 🛃:
 
-`ping` , `serverinfo` , `level` , `reports` , `bugr` , `botinfo`
+`ping` , `serverinfo` , `level` , `reports` , `bugr` , `botinfo`, `osu`
 
 Aleatórios 🧙‍:
 
-`frita` , `troll` , `change` , `frita`
+`frita` , `troll` , `change` , `frita`, `proverbio`
 
 Música 🎼:
 
