@@ -40,6 +40,9 @@ exports.run = (client, message, args, ops) => {
                 let commandParar = require(`./parar.js`);
                     commandParar.run(client, message, args);
                     message.edit(`<:exit:491460304581033985> | Dando o daleste. Musica tocada: \`${videos[m-1].title}\``);
+                case 'adsdsa':
+                let commandP = require(`./pular.js`);
+                    commandP.run(client, message, args);
                 }
                 })
             }) 

@@ -13,11 +13,11 @@ module.exports.run = (client, message, args, ops) => {
         .setAuthor(message.guild.name, message.guild.iconURL)
         .setTitle("Server Info")
         .addField("Nome do Servidor", message.guild.name, true)
-        .addField("🤴 Dono(a) do Server", message.guild.owner.user.tag, true)
-        .addField("👨‍👨‍👧‍👦 Total de Membros", message.guild.memberCount, true)
+        .addField("<:User:492106844278358031> Dono(a) do Server", message.guild.owner.user.tag, true)
+        .addField("<:members:492191050916560896> Total de Membros", message.guild.memberCount, true)
         .addField("<:bottag:490597160560099328> Bots", checkBots(message.guild), true)
-        .addField("💬 Canais", message.guild.channels.size,true)
-        .addField("🌎 Região", message.guild.region, true)
+        .addField("<:Chat:492191006729437184> Canais", message.guild.channels.size,true)
+        .addField("<:Geography:492105770729472000> Região", message.guild.region, true)
         
         
         .setColor("#ffe100")
