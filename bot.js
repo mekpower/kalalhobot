@@ -64,6 +64,7 @@ client.on("message", async message => {
 
     const args = message.content.split(/\s+/g);
     const comando = args.shift().slice(config.prefix.length).toLowerCase();
+    if(!message.content.startsWith(config.prefix)) return;
     let markCode = `\`\`\``;
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
