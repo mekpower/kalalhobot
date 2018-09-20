@@ -7,7 +7,7 @@ module.exports.run = (client, message, args, ops) => {
     
     .setAuthor("Kalalho", client.user.displayAvatarURL)
     .setColor("#ffe100")
-    .addField("Soble min", "Koe, tlanquilo? Eu sou o Kalalho, um bot brasileiro sobre variadas coisas, criado pelo **MekPower#6688**")
+    .addField("Soble min", "Koe, tlanquilo? Eu sou o Kalalho, um bot brasileiro sobre variadas coisas, criado pelo **MekPower#6688**. Prefix: `k&` ")
     .addField("<:Geography:492105770729472000> Servidores", ` ${join}${client.guilds.size}${join}`,true)
     .addField("<:members:492191050916560896> Meus amigos",` ${join}${client.users.size}${join} `,true)
     .addField("<:Chat:492191006729437184> Canais", ` ${join}${client.channels.size}${join} `,true)

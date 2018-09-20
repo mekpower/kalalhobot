@@ -33,7 +33,7 @@ client.on("ready", () => {
     console.log(`Bot foi iniciado, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`);
     setInterval(function(){
 
-        let statues = ['discord.gg/q9zpY3h  | Nosso servidor',`Estou em ${client.guilds.size} servidores 🙋‍`,"🛂 Achou um bug?  ajude a gente, use o comando &bugr e reporte o bug!","&ajuda | Para saber os comandos. 👍"];
+        let statues = ['discord.gg/q9zpY3h  | Nosso servidor',`Estou em ${client.guilds.size} servidores 🙋‍`,"🛂 Achou um bug?  ajude a gente, use o comando k&bugr e reporte o bug!","k&help | Para saber os comandos. 👍"];
 
         let status = statues[Math.floor(Math.random()*statues.length)];
         //bot.user.setGame(statues);

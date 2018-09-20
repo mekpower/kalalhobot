@@ -9,7 +9,7 @@ module.exports.run = async (client, message, args) => {
     .setTitle("<:BulletedList:492195623962017802> Menu de Ajuda")
     .setThumbnail(client.user.displayAvatarURL)
     .setColor("#00a9ff")
-    .addField("Comandos de membros", `<:MoreThan:492193729646428180> \` IMPORTANT: This bot is Brazilian, most of the commands will be in PORTUGUESE \` ${comandosList}`)
+    .addField("Comandos de membros", `<:MoreThan:492193729646428180> \` IMPORTANT: This bot is Brazilian, most of the commands will be in PORTUGUESE. \` \n ${comandosList}`)
 
     message.channel.sendEmbed(ajudaEmbed);
 
