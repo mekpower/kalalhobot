@@ -27,8 +27,8 @@ exports.run = (client, message, args, ops) => {
         collector.once('collect', function(m){
             message.channel.send(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username).then(msg2 => {
                 msg2.react('🔁')
-                msg2.react('491460304581033985');
-                const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '🔁') || (r.emoji.name === '491460304581033985')) && (u.id !== client.user.id))
+                msg2.react('⏩');
+                const collector = msg2.createReactionCollector((r, u) => ((r.emoji.name === '🔁') || (r.emoji.name === '⏩')) && (u.id !== client.user.id))
                 collector.on("collect", r=>{
                 switch (r.emoji.name) {
                 case '🔁': 
@@ -36,7 +36,7 @@ exports.run = (client, message, args, ops) => {
                     commandPlay.run(client, message, [this.videos[parseInt(m.content)-1].url]);
                     message.edit(`:arrow_forward: Tocando agora: \`${videos[m-1].title}\` | Pedida por:  `+message.author.username);
                 break;
-                case '491460304581033985':
+                case '⏩':
                 let commandParar = require(`./pular.js`);
                     commandParar.run(client, message, args);
                     break;
