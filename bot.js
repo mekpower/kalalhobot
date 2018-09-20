@@ -61,7 +61,6 @@ client.on("guildDelete", guild =>{
 client.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type==="dm") return;
-    if (!command.startsWith(config.prefix)) return;
 
     const args = message.content.split(/\s+/g);
     const comando = args.shift().slice(config.prefix.length).toLowerCase();
