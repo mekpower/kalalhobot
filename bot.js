@@ -63,8 +63,8 @@ client.on("message", async message => {
     if(message.channel.type==="dm") return;
     
 
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-    const comando = args.shift().toLowerCase();
+    const args = message.content.split(/\s+/g);
+    const comando = args.shift().slice(config.prefix.length).toLowerCase();
     let markCode = `\`\`\``;
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
