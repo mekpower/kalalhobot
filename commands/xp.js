@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args, prefix, con) => {
   let target = message.mentions.users.first() || message.guild.members.get(args[1]) || message.author;
 
   con.query(`SELECT * FROM xp WHERE id = '${target.id}'`, (err, rows) => {
-    if(err) throw err;
+    if(err) err;
 
     if(!rows[0]) return message.channel.send("Ele num tem xp!");
 
