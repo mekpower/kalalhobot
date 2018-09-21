@@ -1,10 +1,8 @@
-const Discord = require("discord.js")
-const prefix = "prefixo"
-const moment = require("moment")
-moment.locale("pt-BR")
+const Discord = require("discord.js");
+const moment = require("moment");
+moment.locale("pt-BR");
 
 module.exports.run = async (client, message, args) => {
-    if (message.content.startsWith(`${prefix}emojinfo`)) {
         let emoji = message.guild.emojis.find(emoji => emoji.name === `${args.join(" ")}`)
         let animado;
             if (emoji.animated === true) animado = "Sim"
@@ -21,6 +19,5 @@ module.exports.run = async (client, message, args) => {
         .addField("Criado em:", moment(emoji.createdAt).format("LLLL"))
         .addField("ID:", emoji.id)
         .addField("Gerenciado pela Twitch:", gerenciadotwitch)
-        message.channel.send(embed)
-    }
+        message.channel.send(embed);
 }
