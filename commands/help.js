@@ -10,7 +10,7 @@ module.exports.run = async (client, message, args) => {
     .setThumbnail(client.user.displayAvatarURL)
     .setColor("#00a9ff")
     .addField("Comandos de membros", `<:MoreThan:492193729646428180> \` IMPORTANT: This bot is Brazilian, most of the commands will be in PORTUGUESE. \` \n ${comandosList}`)
-
+    .setFooter("Prefix: k&")
     message.channel.sendEmbed(ajudaEmbed);
 
 }

@@ -12,7 +12,7 @@ module.exports.run = (client, message, args, ops) => {
     .addField("<:members:492191050916560896> Meus amigos",` ${join}${client.users.size}${join} `,true)
     .addField("<:Chat:492191006729437184> Canais", ` ${join}${client.channels.size}${join} `,true)
     .addField("<:SourceCode:492191185356718081> Linguagem", "<:nodejs:490597898812391424> Node.js", true)
-    .addField("<:Link:492191113021620234> Links",` [**Site**](https://kalalhobot.glitch.me) \n [**GitHub**](https://github.com/mekpower/kalalhobot)`);
+    .addField("<:Link:492191113021620234> Links",` [**Site**](https://kalalhobot.glitch.me) \n [**Vote**](https://discordbots.org/bot/476011591691796490) \n[**Invite**](https://goo.gl/WznTJ9) \n [**GitHub**](https://github.com/mekpower/kalalhobot) `);
 
     message.channel.sendEmbed(botinfoEmbed);
 
