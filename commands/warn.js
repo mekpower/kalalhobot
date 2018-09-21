@@ -4,7 +4,7 @@ const ms = require("ms");
 let warns = JSON.parse(fs.readFileSync("./warnings.json", "utf8"));
 
 
-module.exports.run = async(bot, message, args) => {
+module.exports.run = async(bot, message, args, con) => {
 
     if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.reply("Sai lazarento!!");
     let wUser = message.guil.member(message.mentions.users.first()) || message.guild.members.get(args[0]);

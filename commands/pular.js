@@ -1,6 +1,6 @@
 
 
-exports.run = (client, message, args, ops) => {
+exports.run = (client, message, args, con) => {
 
     //Vendo se o user ta no voice
     if(!message.member.voiceChannel) return message.channel.send('Entra no canal de voz men!');

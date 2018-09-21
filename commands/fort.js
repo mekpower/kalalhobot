@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const Fortn = require('fortnite');
 const fortnite = new Fortn(process.env.fortapi);
 
-module.exports.run = async (client, message, args) =>{
+module.exports.run = async (client, message, args,con) =>{
 
     let username = args[0];
     let plataform = args[1] || 'pc';

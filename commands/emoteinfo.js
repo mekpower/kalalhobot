@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const moment = require("moment");
 moment.locale("pt-BR");
 
-module.exports.run = async (client, message, args) => {
+module.exports.run = async (client, message, args, con) => {
         let emoji = message.guild.emojis.find(emoji => emoji.name === `${args.join(" ")}`)
         let animado;
             if (emoji.animated === true) animado = "Sim"

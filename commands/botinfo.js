@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-module.exports.run = (client, message, args, ops) => {
+module.exports.run = (client, message, args, con) => {
     let join = `\`\`\``;
 
     let botinfoEmbed = new Discord.RichEmbed()

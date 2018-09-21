@@ -1,6 +1,6 @@
 const search = require('yt-search');
 
-exports.run = (client, message, args, ops) => {
+exports.run = (client, message, args, con) => {
 
     search(args.join(' '), function(err, res){
 
@@ -47,7 +47,7 @@ exports.run = (client, message, args, ops) => {
                 })
             }) 
             let commandFile = require(`./play.js`);
-            commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url], ops);
+            commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url], con);
         })
 
     });

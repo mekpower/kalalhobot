@@ -1,4 +1,4 @@
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, con) => {
 
     message.channel.send("Ta trolando certeza", {
         tts: true,

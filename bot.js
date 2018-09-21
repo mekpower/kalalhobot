@@ -4,7 +4,6 @@ const config = require('./config.json');
 let file = require("./dataConf.json");
 const fs = require("fs");
 const mysql = require("mysql");
-sql.open("./score.sqlite");
 const osu = require('node-osu');
 var anti_spam = require("discord-anti-spam");
 
@@ -215,7 +214,7 @@ client.on("message", async message => {
         }
 
         let arqComando = require(`./commands/${comando}.js`);
-        arqComando.run(client, message, args);
+        arqComando.run(client, message, args, con);
 
     }catch(err){
         console.log(err.stack);

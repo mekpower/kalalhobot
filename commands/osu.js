@@ -10,7 +10,7 @@ var osuApi = new osu.Api(osuAPIkey, {
     completeScores: false
 })
 
-module.exports.run = (client, message, args) =>{
+module.exports.run = (client, message, args, con) =>{
     let markCode = `\`\`\``;
 
     osuApi.getUser({u: args}).then(user => {
