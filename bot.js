@@ -55,7 +55,12 @@ client.on("guildDelete", guild =>{
     
 });
 
-
+function clean(text) {
+    if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    else
+    return text;
+    }
 
 
 client.on("message", async message => {
@@ -116,7 +121,22 @@ client.on("message", async message => {
         message.channel.send("<a:AniPing:471788554142351391>");
     }
 
+    const argsE = message.content.split(" ").slice(1);
+    if(comand === "eval"){
 
+        try {
+            const code = argsE.join(" ");
+            let evaled = eval(code);
+            
+            if (typeof evaled !== "string")
+            evaled = require("util").inspect(evaled);
+            
+            message.channel.send(clean(evaled), {code:"xl"});
+        } catch (err) {
+            message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+            }
+
+    }
     if(comando === "reports"){
         let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!reporUs) return message.channel.send("Não achei esse cabra, cadê ele??!!");
