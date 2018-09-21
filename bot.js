@@ -9,7 +9,6 @@ var anti_spam = require("discord-anti-spam");
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
-const pasSQL = process.env.pasSQL;
 const osuAPIkey = process.env.osuAPI;
 
 const ownerID = '483124757181497347';
@@ -106,7 +105,7 @@ client.on("message", async message => {
     }
 
     con.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) => {
-        if(err) throw err;
+        if(err) err;
     
         let sql;
 
