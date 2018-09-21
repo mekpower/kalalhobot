@@ -195,18 +195,6 @@ client.on("message", async message => {
     
     }
 
-    if (comando === "level") {
-        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-          if (!row) return message.reply("<:lvl:491961992110931969> seu lvl atual é 0");
-          message.reply(`<:lvl:491961992110931969> seu lvl atual é ${row.level}`);
-        });
-      }
-      if (comando === "xp") {
-        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-          if (!row) return message.reply("você não tem pontos ainda <:FeelsBadMan:439756675583311872>");
-          message.reply(`você tem ${row.points} xp, goodi jobi <:PepeBebendoCafe:469880805624119327>`);
-        });
-      }
 
     let responseObject = {
         //Coloque todos os comandos simples de resposta aqui
