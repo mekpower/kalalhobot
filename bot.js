@@ -27,13 +27,7 @@ var osuApi = new osu.Api(osuAPIkey, {
 })
 //I.H Fim_____________________________________________
 
-var con = mysql.createConnection({
-    host: file.heHost,
-    user: file.heUser,
-    port: file.hePort,
-    password: file.hePass,
-    database: file.heData
-});
+
 
 //Client.on __________________________________________
 client.on("ready", () => {
@@ -104,28 +98,7 @@ client.on("message", async message => {
         );
     }
 
-    con.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) => {
-        if(err) err;
     
-        let sql;
-
-        if(rows.length < 1){
-            sql = `INSERT INTO xp (id, xp, level) VALUES ('${message.author.id}', ${generateXp()}, 1)`
-          } else {
-            let xp = rows[0].xp;
-            let level = row[0].level;
-          let curLevel = Math.floor(0.1 * Math.sqrt(row.xp + 1));
-          if (curLevel > level) {
-            level = curLevel;
-            sql = `UPDATE xp SET xp = ${xp + generateXp()} WHERE id = '${message.author.id}'`;
-            sql = `UPDATE level SET level = ${level} WHERE id = '${message.author.id}'`;
-            message.reply(`<:lvlUp:491959868937207810> Você upou para o lvl **${level}**! `);
-          }
-          con.query(sql);
-        }
-      }).catch(() => {
-        console.error;
-      });
     
       if(!message.content.startsWith(config.prefix)) return;
 
