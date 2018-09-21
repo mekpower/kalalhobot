@@ -3,7 +3,7 @@ const prefix = "prefixo"
 const moment = require("moment")
 moment.locale("pt-BR")
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args) => {
     if (message.content.startsWith(`${prefix}emojinfo`)) {
         let emoji = message.guild.emojis.find(emoji => emoji.name === `${args.join(" ")}`)
         let animado;

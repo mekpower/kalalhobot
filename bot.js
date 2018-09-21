@@ -122,7 +122,7 @@ client.on("message", async message => {
     }
 
     const argsE = message.content.split(" ").slice(1);
-    if(comand === "eval"){
+    if(comando === "eval"){
 
         try {
             const code = argsE.join(" ");
