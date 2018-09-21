@@ -1,0 +1,7 @@
+{
+    "heHost": "process.env.heHost",
+    "heUser": "process.env.heUser",
+    "heData": "process.env.heData",
+    "hePort": "process.env.hePort",
+    "hePass": "process.env.hePass"
+}

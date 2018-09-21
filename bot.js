@@ -1,13 +1,14 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require('./config.json');
-let xp = require("./xp.json");
+let file = require("./dataConf.json");
 const fs = require("fs");
-const sql = require("sqlite");
+const mysql = require("mysql");
 sql.open("./score.sqlite");
 const osu = require('node-osu');
-
 var anti_spam = require("discord-anti-spam");
+
+//IMPORTS DO HOST_______________________________________
 const token = process.env.token;
 const pasSQL = process.env.pasSQL;
 const osuAPIkey = process.env.osuAPI;
@@ -26,9 +27,17 @@ var osuApi = new osu.Api(osuAPIkey, {
 
     completeScores: false
 })
+//I.H Fim_____________________________________________
 
+var con = mysql.createConnection({
+    host: file.heHost,
+    user: file.heUser,
+    port: file.hePort,
+    password: file.hePass,
+    database: file.heData
+});
 
-
+//Client.on __________________________________________
 client.on("ready", () => {
     console.log(`Bot foi iniciado, com ${client.users.size} usuarios, em ${client.channels.size} canais, em ${client.guilds.size} servidores.`);
     setInterval(function(){
@@ -54,6 +63,16 @@ client.on("guildDelete", guild =>{
     client.user.setActivity(`Serving ${client.guilds.size} servers`);
     
 });
+//Client.on FIM_________________________________________________________________
+
+function generateXp() {
+    let min = 2;
+    let max = 20;
+  
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  
+  }
+  
 
 function clean(text) {
     if (typeof(text) === "string")
@@ -87,23 +106,27 @@ client.on("message", async message => {
         );
     }
 
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-        if (!row) {
-          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-        } else {
-          let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
-          if (curLevel > row.level) {
-            row.level = curLevel;
-            sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-            message.reply(`<:lvlUp:491959868937207810> Você upou para o lvl **${curLevel}**! `);
+    con.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) => {
+        if(err) throw err;
+    
+        let sql;
+
+        if(rows.length < 1){
+            sql = `INSERT INTO xp (id, xp, level) VALUES ('${message.author.id}', ${generateXp()}, 1)`
+          } else {
+            let xp = rows[0].xp;
+            let level = row[0].level;
+          let curLevel = Math.floor(0.1 * Math.sqrt(row.xp + 1));
+          if (curLevel > level) {
+            level = curLevel;
+            sql = `UPDATE xp SET xp = ${xp + generateXp()} WHERE id = '${message.author.id}'`;
+            sql = `UPDATE level SET level = ${level} WHERE id = '${message.author.id}'`;
+            message.reply(`<:lvlUp:491959868937207810> Você upou para o lvl **${level}**! `);
           }
-          sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
+          con.query(sql);
         }
       }).catch(() => {
         console.error;
-        sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-        });
       });
     
       if(!message.content.startsWith(config.prefix)) return;
