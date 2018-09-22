@@ -69,18 +69,18 @@ module.exports.run = function(bot, message, args){
             .setTitle(title)
             .setAuthor("Anime")
             .setColor(16610652)
-            .setDescription("Status: "+statusUpper)
+            .setDescription("Status: "+translate(statusUpper, {to: "pt"}))
             .setFooter("Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix", "https://i.imgur.com/8pMWE28.png")
             .setThumbnail(smallPoster)
             .setTimestamp()
             .setURL("https://kitsu.io/anime/"+animeID)
-            .addField("Synopsis:", synopsis)
-            .addField("Episode Count:", episodeCount, true)
-            .addField("Episode Length:", episodeLength+" Minutos", true)
+            .addField("Synopsis:", translate(synopsis, {to: "pt"}))
+            .addField("Total de Episódios:", episodeCount, true)
+            .addField("Tempo de Episódios:", episodeLength+" Minutos", true)
             .addField("English:", titleEn, true)
-            .addField("Romanized:", titleJP, true)
-            .addField("Start:", startDate, true)
-            .addField("End:", endDate, true);
+            .addField("Romanizado:", titleJP, true)
+            .addField("Começou em:", startDate, true)
+            .addField("Terminou em:", endDate, true);
             message.channel.send({embed});
         }//END if !searchresults
     });//END searchAnime
