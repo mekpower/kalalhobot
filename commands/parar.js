@@ -10,7 +10,7 @@ function play(connection, message) {
     })
 }
 var servers = {};
-module.exports.run = (client, message, args, con) => {
+module.exports.run = (client, message, args) => {
     var server = servers[message.guild.id];
     if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
 }

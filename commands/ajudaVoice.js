@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-module.exports.run = (client, message, args, ops) => {
+module.exports.run = (client, message, args) => {
 
     var voiceEmbed = new Discord.RichEmbed()
 

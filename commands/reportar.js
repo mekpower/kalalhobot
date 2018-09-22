@@ -2,7 +2,7 @@ const bot = new Discord.Client({disableEveryone: true});
 var anti_spam = require("discord-anti-spam");
 const Discord = require("discord.js");
 
-module.exports.run = (client, message, args, con) => {
+module.exports.run = (client, message, args) => {
     
     
     let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
