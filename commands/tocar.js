@@ -47,7 +47,7 @@ exports.run = (client, message, args) => {
                 })
             }) 
             let commandFile = require(`./play.js`);
-            commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url], con);
+            commandFile.run(client, message, [this.videos[parseInt(m.content)-1].url]);
         })
 
     });
