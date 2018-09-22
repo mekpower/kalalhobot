@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/coin', {
+mongoose.connect('mongodb://localhost:27017/coin', {
     useNewUrlParser: true
 });
 const Koin = require("../koin.js");

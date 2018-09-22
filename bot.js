@@ -10,7 +10,7 @@ var anti_spam = require("discord-anti-spam");
 const kitsu = require('node-kitsu');
 const translate = require('translate');
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/coin', {
+mongoose.connect('mongodb://localhost:27017/coin', {
     useNewUrlParser: true
 });
 const Koin = require("./koin.js");
