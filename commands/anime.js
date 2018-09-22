@@ -61,8 +61,8 @@ module.exports.run = async function(bot, message, args){
           //The Status returns lowercase "finished", This transforms it into "Finished"
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
-        const synBR = await translate(synopsis, { to: 'pt', engine: traEng, key: traKey });
-        const statBR = await translate(statusUpper, { to: 'pt', engine: traEng, key: traKey });
+        const synBR = traduzir(client, synopsis);
+        const statBR = traduzir(client, statusUpper);
                 
         const embed = new Discord.RichEmbed()
         .setTitle(title)
@@ -87,6 +87,10 @@ module.exports.run = async function(bot, message, args){
             
         }//END if !searchresults
     });//END searchAnime
+}
+
+async function traduzir(client, message){
+    return await translate(message, { to: 'pt', engine: traEng, key: traKey });
 }
 
 module.exports.info = {
