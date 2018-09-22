@@ -28,6 +28,7 @@
     "simple-youtube-api": "^5.0.2",
     "sqlite": "^3.0.0",
     "sqlite3": "^4.0.2",
+    "translate": "^1.0.2",
     "yt-search": "^0.1.4"
   }
 }

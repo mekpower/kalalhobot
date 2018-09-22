@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const kitsu = require('node-kitsu');
-const translate = require("google-translate-api");
+const translate = require('translate');
 
 module.exports.run = function(bot, message, args){
 	kitsu.searchAnime(args, 0).then(results => {
@@ -58,27 +58,27 @@ module.exports.run = function(bot, message, args){
           //The Status returns lowercase "finished", This transforms it into "Finished"
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
-         translate(synopsis, {to: "pt"}).then(res =>{
+        const synBR = translate(synopsis, 'pt');
+        const statBR = translate(statusUpper, 'pt');
                 
-            const embed = new Discord.RichEmbed()
-            .setTitle(title)
-            .setAuthor("Anime")
-            .setColor(16610652)
-            .setDescription("Status: "+statusUpper)
-            .setFooter("Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix", "https://i.imgur.com/8pMWE28.png")
-            .setThumbnail(smallPoster)
-            .setTimestamp()
-            .setURL("https://kitsu.io/anime/"+animeID)
-            .addField("Synopsis:", res.synopsis)
-            .addField("Total de Episódios:", episodeCount, true)
-            .addField("Tempo de Episódios:", episodeLength+" Minutos", true)
-            .addField("English:", titleEn, true)
-            .addField("Romanizado:", titleJP, true)
-            .addField("Começou em:", startDate, true)
-            .addField("Terminou em:", endDate, true);
-            message.channel.send({embed});
+        const embed = new Discord.RichEmbed()
+        .setTitle(title)
+        .setAuthor("Anime")
+        .setColor(16610652)
+        .setDescription("Status: "+statBR)
+        .setFooter("Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix", "https://i.imgur.com/8pMWE28.png")
+        .setThumbnail(smallPoster)
+        .setTimestamp()
+        .setURL("https://kitsu.io/anime/"+animeID)
+        .addField("Synopsis:", synBR)
+        .addField("Total de Episódios:", episodeCount, true)
+        .addField("Tempo de Episódios:", episodeLength+" Minutos", true)
+        .addField("English:", titleEn, true)
+        .addField("Romanizado:", titleJP, true)
+        .addField("Começou em:", startDate, true)
+        .addField("Terminou em:", endDate, true);
+        message.channel.send({embed});
 
-          });
           
 
             
