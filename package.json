@@ -20,6 +20,7 @@
     "fortnite": "^4.1.1",
     "google-translate-api": "^2.3.0",
     "moment": "^2.22.2",
+    "mongoose": "^5.2.17",
     "mysql": "^2.16.0",
     "node-kitsu": "^1.1.1",
     "node-opus": "^0.3.0",

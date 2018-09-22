@@ -9,6 +9,11 @@ const osu = require('node-osu');
 var anti_spam = require("discord-anti-spam");
 const kitsu = require('node-kitsu');
 const translate = require('translate');
+const mongoose = require("mongoose");
+mongoose.connect('mongodb://localhost/coin', {
+    useNewUrlParser: true
+});
+const Koin = require("./koin.js");
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
@@ -84,6 +89,24 @@ client.on("message", async message => {
     const args = message.content.split(/\s+/g);
     const comando = args.shift().slice(config.prefix.length).toLowerCase();
     
+    let koinsAdd = Math.ceil(Math.random() * 50);
+    Koin.findOne({userID: message.author.id,
+         serverID: message.guild.id
+        }, (err, coin) =>{
+            if(err) console.log(err);
+            if(!coin){
+                const newCoin = new Koin({
+                    userID:message.author.id,
+                    serverID: message.guild.id,
+                    coin: koinsAdd
+                })
+                newCoin.save().catch(err => console.log(err));
+            }else{
+                koin.coin = koin.coin +koinsAdd;
+                koin.save().catch(err => console.log(err));
+            }
+        })
+
     let markCode = `\`\`\``;
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
     let mentin = ['@Kalalho#0776'];
