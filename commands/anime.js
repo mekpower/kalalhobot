@@ -58,23 +58,19 @@ module.exports.run = function(bot, message, args){
           //The Status returns lowercase "finished", This transforms it into "Finished"
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
-          translate(synopsis, {to: "pt"}).then(res =>{
-            synopsis = res.synopsis;
-          });
-          translate(statusUpper, {to: "pt"}).then(res =>{
-            statusUpper = res.statusUpper;
-          });
-
+         await translate(synopsis, {to: "pt"}).then(res =>{
+           await translate(statusUpper, {to: "pt"}).then(res =>{
+                
             const embed = new Discord.RichEmbed()
             .setTitle(title)
             .setAuthor("Anime")
             .setColor(16610652)
-            .setDescription("Status: "+translate(statusUpper, {to: "pt"}))
+            .setDescription("Status: "+res.statusUpper)
             .setFooter("Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix", "https://i.imgur.com/8pMWE28.png")
             .setThumbnail(smallPoster)
             .setTimestamp()
             .setURL("https://kitsu.io/anime/"+animeID)
-            .addField("Synopsis:", translate(synopsis, {to: "pt"}))
+            .addField("Synopsis:", res.synopsis)
             .addField("Total de Episódios:", episodeCount, true)
             .addField("Tempo de Episódios:", episodeLength+" Minutos", true)
             .addField("English:", titleEn, true)
@@ -82,6 +78,12 @@ module.exports.run = function(bot, message, args){
             .addField("Começou em:", startDate, true)
             .addField("Terminou em:", endDate, true);
             message.channel.send({embed});
+
+            });
+          });
+          
+
+            
         }//END if !searchresults
     });//END searchAnime
 }
