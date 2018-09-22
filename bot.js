@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require('./config.json');
 let file = require("./dataConf.json");
+let xp = require("./xp.json");
 const fs = require("fs");
 const mysql = require("mysql");
 const osu = require('node-osu');
