@@ -7,6 +7,8 @@ const fs = require("fs");
 const mysql = require("mysql");
 const osu = require('node-osu');
 var anti_spam = require("discord-anti-spam");
+const kitsu = require('node-kitsu');
+const translate = require("google-translate-api");
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
