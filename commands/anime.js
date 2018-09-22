@@ -59,13 +59,12 @@ module.exports.run = function(bot, message, args){
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
          translate(synopsis, {to: "pt"}).then(res =>{
-           translate(statusUpper, {to: "pt"}).then(res =>{
                 
             const embed = new Discord.RichEmbed()
             .setTitle(title)
             .setAuthor("Anime")
             .setColor(16610652)
-            .setDescription("Status: "+res.statusUpper)
+            .setDescription("Status: "+statusUpper)
             .setFooter("Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix", "https://i.imgur.com/8pMWE28.png")
             .setThumbnail(smallPoster)
             .setTimestamp()
@@ -79,7 +78,6 @@ module.exports.run = function(bot, message, args){
             .addField("Terminou em:", endDate, true);
             message.channel.send({embed});
 
-            });
           });
           
 
