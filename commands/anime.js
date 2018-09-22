@@ -58,8 +58,8 @@ module.exports.run = function(bot, message, args){
           //The Status returns lowercase "finished", This transforms it into "Finished"
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
-         await translate(synopsis, {to: "pt"}).then(res =>{
-           await translate(statusUpper, {to: "pt"}).then(res =>{
+         translate(synopsis, {to: "pt"}).then(res =>{
+           translate(statusUpper, {to: "pt"}).then(res =>{
                 
             const embed = new Discord.RichEmbed()
             .setTitle(title)
