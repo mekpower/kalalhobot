@@ -58,23 +58,30 @@ module.exports.run = function(bot, message, args){
           //The Status returns lowercase "finished", This transforms it into "Finished"
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
-          const embed = new Discord.RichEmbed()
-               .setTitle(title)
-               .setAuthor("Anime")
-               .setColor(16610652)
-               .setDescription("Status: "+translate(statusUpper, {to: "pt-BR"}))
-               .setFooter("Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix", "https://i.imgur.com/8pMWE28.png")
-               .setThumbnail(smallPoster)
-               .setTimestamp()
-               .setURL("https://kitsu.io/anime/"+animeID)
-               .addField("Synopsis:", translate(synopsis, {to: "pt-BR"}))
-               .addField("Episode Count:", episodeCount, true)
-               .addField("Episode Length:", episodeLength+" Minutos", true)
-               .addField("English:", titleEn, true)
-               .addField("Romanized:", titleJP, true)
-               .addField("Start:", startDate, true)
-               .addField("End:", endDate, true);
-               message.channel.send({embed});
+          translate(synopsis, {to: "pt"}).then(res =>{
+            synopsis = res.synopsis;
+          });
+          translate(statusUpper, {to: "pt"}).then(res =>{
+            statusUpper = res.statusUpper;
+          });
+
+            const embed = new Discord.RichEmbed()
+            .setTitle(title)
+            .setAuthor("Anime")
+            .setColor(16610652)
+            .setDescription("Status: "+statusUpper)
+            .setFooter("Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix", "https://i.imgur.com/8pMWE28.png")
+            .setThumbnail(smallPoster)
+            .setTimestamp()
+            .setURL("https://kitsu.io/anime/"+animeID)
+            .addField("Synopsis:", synopsis)
+            .addField("Episode Count:", episodeCount, true)
+            .addField("Episode Length:", episodeLength+" Minutos", true)
+            .addField("English:", titleEn, true)
+            .addField("Romanized:", titleJP, true)
+            .addField("Start:", startDate, true)
+            .addField("End:", endDate, true);
+            message.channel.send({embed});
         }//END if !searchresults
     });//END searchAnime
 }
