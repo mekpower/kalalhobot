@@ -5,7 +5,7 @@ const translate = require('translate');
 const traEng = 'yandex';
 const traKey = process.env.yandexAPI;
 
-module.exports.run = function(bot, message, args){
+module.exports.run = async function(bot, message, args){
 	kitsu.searchAnime(args, 0).then(results => {
         searchResult = results[0];
         if(!searchResult){
