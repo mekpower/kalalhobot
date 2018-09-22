@@ -72,7 +72,7 @@ module.exports.run = async function(bot, message, args){
         .setFooter("Informações trazidas pelo Kitsu.io", "https://i.imgur.com/8pMWE28.png")
         .setThumbnail(smallPoster)
         .setTimestamp()
-        addField("Sinopse", synBR)
+        .addField("Sinopse", synBR)
         .setURL("https://kitsu.io/anime/"+animeID)
         .addField("Total de Episódios:", episodeCount, true)
         .addField("Tempo de Episódios:", episodeLength+" Minutos", true)
