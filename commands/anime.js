@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 const kitsu = require('node-kitsu');
 const translate = require('translate');
 
-const traEng = 'google';
-const traKey = process.env.googleAPI;
+const traEng = 'yandex';
+const traKey = process.env.yandexAPI;
 
 module.exports.run = function(bot, message, args){
 	kitsu.searchAnime(args, 0).then(results => {
@@ -61,8 +61,8 @@ module.exports.run = function(bot, message, args){
           //The Status returns lowercase "finished", This transforms it into "Finished"
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
-        const synBR = translate(synopsis, { to: 'pt', engine: 'google', key: traKey });
-        const statBR = translate(statusUpper, { to: 'pt', engine: 'google', key: traKey });
+        const synBR = translate(synopsis, { to: 'pt', engine: traEng, key: traKey });
+        const statBR = translate(statusUpper, { to: 'pt', engine: traEng, key: traKey });
                 
         const embed = new Discord.RichEmbed()
         .setTitle(title)
