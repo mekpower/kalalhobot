@@ -65,10 +65,8 @@ module.exports.run = async function(bot, message, args){
         const statBR = traduzir(statusUpper);
         
         translate(synopsis, {to:'pt', engine: 'yandex', key: process.env.yandexAPI}).then(text => {
-            message.channel.send(text); 
-          });
 
-        const embed = new Discord.RichEmbed()
+            const embed = new Discord.RichEmbed()
         .setTitle(title)
         .setAuthor("Anime")
         .setColor(16610652)
@@ -76,7 +74,7 @@ module.exports.run = async function(bot, message, args){
         .setFooter("Informações trazidas pelo Kitsu.io", "https://i.imgur.com/8pMWE28.png")
         .setThumbnail(smallPoster)
         .setTimestamp()
-        .addField("Sinopse", synBR)
+        .addField("Sinopse", text)
         .setURL("https://kitsu.io/anime/"+animeID)
         .addField("Total de Episódios:", episodeCount, true)
         .addField("Tempo de Episódios:", episodeLength+" Minutos", true)
@@ -85,6 +83,10 @@ module.exports.run = async function(bot, message, args){
         .addField("Começou em:", startDate, true)
         .addField("Terminou em:", endDate, true);
         message.channel.send({embed});
+
+          });
+
+        
 
           
 
