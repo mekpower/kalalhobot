@@ -49,8 +49,11 @@ module.exports.run = async (client, message, args) => {
         .setFooter(client.user.username, client.user.avatarURL)
 		.setTimestamp();
 
-        msg.member.send(menuEmbed).then(msg2 => {
+        message.channel.send(menuEmbed).then(msg2 => {
             msg2.react('🗒');
+            msg2.react('👾');
+			msg2.react('💬');
+			msg2.react('🎧');
         const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '🗒' || r.emoji.name === '👾' || r.emoji.name === '💬' || r.emoji.name === '🎧') && (u.id !== client.user.id && u.id === msg.author.id))
         collector.on("collect", r=>{
             switch (r.emoji.name) {
