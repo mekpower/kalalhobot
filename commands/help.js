@@ -50,7 +50,9 @@ module.exports.run = async (client, message, args) => {
 		.setTimestamp();
 
         message.channel.send(menuEmbed).then(msg2 => {
-            msg2.react('🗒');
+            msg2.react('🗒').then( (ed,u) =>{
+                if((ed.emoji.name === '🗒')&& (u.id !== client.user.id && u.id === message.author.id))  ed.message.edit(embed1);
+            })
             msg2.react('👾');
 			msg2.react('💬');
 			msg2.react('🎧');
@@ -58,7 +60,6 @@ module.exports.run = async (client, message, args) => {
         collector.on("collect", r=>{
             switch (r.emoji.name) {
             case '🗒': 
-            message.client.edit(embed1)
 			break;
 			case '👾': 
             message.edit(embed2)
