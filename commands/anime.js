@@ -89,10 +89,10 @@ module.exports.run = async function(bot, message, args){
     });//END searchAnime
 }
 
-Promise().then(async function traduzir(text){
+async function traduzir(text){
     let ts = await translate(text, { to: 'pt', engine: traEng, key: traKey });
-    return Promise(ts);
-});
+    return ts;
+};
 
 module.exports.info = {
     name: "anime"
