@@ -3,15 +3,71 @@ const fs= require("fs");
 
 module.exports.run = async (client, message, args) => {
 
-    var comandosList = fs.readFileSync('./commands/comandos.txt','utf8');
-    let hUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    let ajudaEmbed = new Discord.RichEmbed()
-    .setTitle("<:BulletedList:492195623962017802> Menu de Ajuda")
-    .setThumbnail(client.user.displayAvatarURL)
-    .setColor("#00a9ff")
-    .addField("Comandos de membros", `<:MoreThan:492193729646428180> \` IMPORTANT: This bot is Brazilian, most of the commands will be in PORTUGUESE. \` \n ${comandosList}`)
-    .setFooter("Prefix: k&")
-    message.channel.sendEmbed(ajudaEmbed);
+    let menuEmbed = new Discord.RichEmbed()
+	
+	.setTitle("Help Menu")
+	.setColor('36393e')
+	.setDescrption("Cada emote é uma opção, use as reações para ir para tal menu")
+	.addField("Reações", 'Infos = 🗒 \n Games = 👾 \n Entreteimento = 💬 \n Música = 🎧')
+	.setFooter(`Comando solicitado por: ${message.author.username}`, message.author.avatarURL)
+	.setTimestamp();
+	
+    
+        var embed1 = new Discord.RichEmbed()
+
+        .setAuthor(`${message.author.username}`, message.author.avatarURL)
+        .setTitle("Infos comandos")
+        .setDescription("Comandos de info e como usar alguns. \n `ping` , `serverinfo` , `level` , `botinfo` \n `reports` :Ex.: k&reports <@usuario> <motivo_do_report> \n `bugr` :Ex.: k&bugr <nome_do_comando> <problema_do_comando> \n `anime` :Ex>: k&anime <nome_do_anime>") 
+        .setColor(0xfffff)
+        .setFooter(client.user.username, client.user.avatarURL)
+		.setTimestamp();
+		
+		var embed2 = new Discord.RichEmbed()
+
+        .setAuthor(`${message.author.username}`, message.author.avatarURL)
+        .setTitle("Games comandos")
+        .setDescription("Comandos e como usar. \n `osu` :Ex.: k&osu <nome_do_jogador> \n `fort` :Ex.: k&fort <nome_do_jogador>") 
+        .setColor(0xfffff)
+        .setFooter(client.user.username, client.user.avatarURL)
+		.setTimestamp();
+		
+		var embed3 = new Discord.RichEmbed()
+
+        .setAuthor(`${message.author.username}`, message.author.avatarURL)
+        .setTitle("Comandos de entretenimento")
+        .setDescription("Comandos simples, apenas digitálos normalmente. \n `frita` , `troll` , `change` , `proverbio`") 
+        .setColor(0xfffff)
+        .setFooter(client.user.username, client.user.avatarURL)
+		.setTimestamp();
+		
+		var embed4 = new Discord.RichEmbed()
+
+        .setAuthor(`${message.author.username}`, message.author.avatarURL)
+        .setTitle("Comandos de música")
+        .setDescription("Comandos e como usar. \n `tocar` :Ex.: k&osu <nome_da_musica \n `pular`") 
+        .setColor(0xfffff)
+        .setFooter(client.user.username, client.user.avatarURL)
+		.setTimestamp();
+
+        msg.member.send(menuEmbed).then(msg2 => {
+            msg2.react('🗒');
+        const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '🗒' || r.emoji.name === '👾' || r.emoji.name === '💬' || r.emoji.name === '🎧') && (u.id !== client.user.id && u.id === msg.author.id))
+        collector.on("collect", r=>{
+            switch (r.emoji.name) {
+            case '🗒': 
+            message.edit(embed1)
+			break;
+			case '👾': 
+            message.edit(embed2)
+			break;
+			case '💬': 
+            message.edit(embed3)
+			break;
+			case '🎧': 
+            message.edit(embed4)
+            }
+            })
+        }) 
 
 }
 
