@@ -9,6 +9,7 @@ const osu = require('node-osu');
 var anti_spam = require("discord-anti-spam");
 const kitsu = require('node-kitsu');
 const translate = require('translate');
+const firebase = require('firebase');
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
@@ -28,6 +29,18 @@ var osuApi = new osu.Api(osuAPIkey, {
 
     completeScores: false
 })
+
+var conFire = {
+    apiKey: "AIzaSyC77kFnklIYoUqxYfITANH2xkw-fg4gj4M",
+    authDomain: "kalalhobot.firebaseapp.com",
+    databaseURL: "https://kalalhobot.firebaseio.com",
+    projectId: "kalalhobot",
+    storageBucket: "kalalhobot.appspot.com",
+    messagingSenderId: "706863315399"
+};
+firebase.initializeApp(conFire);
+let database = firebase.database();
+
 //I.H Fim_____________________________________________
 
 
@@ -84,6 +97,32 @@ client.on("message", async message => {
     const args = message.content.split(/\s+/g);
     const comando = args.shift().slice(config.prefix.length).toLowerCase();
     
+    
+
+    if(!firebase.database(LevelUp)){
+        function writeUserData(userId, guildId, level, xp) {
+            userId = message.author.id;
+            guildId = message.guild.id;
+            level = 0;
+            xp = 0;
+            firebase.database().ref('vevelUp/' + userId + guildId).set({
+              level: level,
+              xp : xp
+            });
+          }
+    } else{
+        function writeUserData(userId, guildId, level, xp) {
+            userId = message.author.id;
+            guildId = message.guild.id;
+            var postD = {
+                level: level,
+                xp: xp +generateXp()
+            }
+            var updates = {};
+            updates['/levelUp/'+userId +guildId] = postD;
+            return firebase.database().ref().update(updates);
+        }
+    }
 
     let markCode = `\`\`\``;
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
