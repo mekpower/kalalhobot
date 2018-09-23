@@ -1,5 +1,5 @@
 var jimp = require('jimp');
-const Discord = require("disocrd.js");
+const Discord = require("discord.js");
 
 module.exports.run = (client, message, args) =>{
 
