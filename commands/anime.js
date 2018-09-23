@@ -63,7 +63,11 @@ module.exports.run = async function(bot, message, args){
 
         const synBR = traduzir(synopsis);
         const statBR = traduzir(statusUpper);
-                
+        
+        translate(synopsis, {to:'pt', engine: 'yandex', key: process.env.yandexAPI}).then(text => {
+            message.channel.send(text); 
+          });
+
         const embed = new Discord.RichEmbed()
         .setTitle(title)
         .setAuthor("Anime")
