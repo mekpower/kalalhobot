@@ -97,18 +97,6 @@ client.on("message", async message => {
     const args = message.content.split(/\s+/g);
     const comando = args.shift().slice(config.prefix.length).toLowerCase();
     
-    
-
-        function writeUserData2(userId, guildId, level, xp) {
-            var postD = {
-                level: level,
-                xp: xp +generateXp()
-            }
-            var updates = {};
-            updates['/levelUp/'+userId +guildId] = postD;
-            return firebase.database().ref().update(updates);
-        }
-        writeUserData2(message.author.id, message.guild.id, level, xp);
  
 
     let markCode = `\`\`\``;
