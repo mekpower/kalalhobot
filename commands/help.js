@@ -58,19 +58,19 @@ module.exports.run = async (client, message, args) => {
         collector.on("collect", (r, u)=>{
             switch (r.emoji.name) {
             case '🗒':
-            r.remove(u.id);
+            r.remove(u.author.id);
             r.message.edit(embed1)
 			break;
             case '👾': 
-            r.remove(u.id);
+            r.remove(u.author.id);
             r.message.edit(embed2)
 			break;
             case '💬': 
-            r.remove(u.id);
+            r.remove(u.author.id);
             r.message.edit(embed3)
 			break;
             case '🎧': 
-            r.remove(u.id);
+            r.remove(u.author.id);
             r.message.edit(embed4)
             break;
             }
