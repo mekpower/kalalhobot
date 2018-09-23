@@ -54,7 +54,7 @@ module.exports.run = async (client, message, args) => {
             msg2.react('👾');
 			msg2.react('💬');
 			msg2.react('🎧');
-        const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '🗒' || r.emoji.name === '👾' || r.emoji.name === '💬' || r.emoji.name === '🎧') && (u.id !== client.user.id && u.id === msg.author.id))
+        const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '🗒' || r.emoji.name === '👾' || r.emoji.name === '💬' || r.emoji.name === '🎧') && (u.id !== client.user.id && u.id === message.author.id))
         collector.on("collect", r=>{
             switch (r.emoji.name) {
             case '🗒': 
