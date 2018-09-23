@@ -55,8 +55,8 @@ module.exports.run = async function(bot, message, args){
 
           //If the synopsis is longer then 700 characters cut it off and add "..."
           //So the post doesn't become to long.
-          if(synopsis.length > 700){
-              var synopsis = synopsis.substring(0, 700) + '...';
+          if(synopsis.length > 400){
+              var synopsis = synopsis.substring(0, 400) + '...';
           }
           //The Status returns lowercase "finished", This transforms it into "Finished"
           var statusUpper = status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
