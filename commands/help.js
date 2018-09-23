@@ -50,25 +50,29 @@ module.exports.run = async (client, message, args) => {
 		.setTimestamp();
 
         message.channel.send(menuEmbed).then(msg2 => {
-            msg2.react('🗒').then( (ed,u) =>{
-                if((ed.emoji.name === '🗒')&& (u.id !== client.user.id && u.id === message.author.id))  ed.message.edit(embed1);
-            })
+            msg2.react('🗒');
             msg2.react('👾');
 			msg2.react('💬');
 			msg2.react('🎧');
         const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '🗒' || r.emoji.name === '👾' || r.emoji.name === '💬' || r.emoji.name === '🎧') && (u.id !== client.user.id && u.id === message.author.id))
         collector.on("collect", r=>{
             switch (r.emoji.name) {
-            case '🗒': 
+            case '🗒':
+            reaction.remove(u);
+            r.message.edit(embed1)
 			break;
-			case '👾': 
+            case '👾': 
+            reaction.remove(u);
             r.message.edit(embed2)
 			break;
-			case '💬': 
+            case '💬': 
+            reaction.remove(u);
             r.message.edit(embed3)
 			break;
-			case '🎧': 
+            case '🎧': 
+            reaction.remove(u);
             r.message.edit(embed4)
+            break;
             }
             })
         }) 
