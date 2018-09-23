@@ -6,7 +6,7 @@ module.exports.run = (client, message, args) =>{
 	
 	.setTitle("Help Menu")
 	.setColor('36393e')
-	.setDescrption("Cada emote é uma opção, use as reações para ir para tal menu")
+	.setDescription("Cada emote é uma opção, use as reações para ir para tal menu")
 	.addField("Reações", 'Infos = <:BulletedList:492195623962017802> \n Games = <:R2D2:492193706909106176> \n Entreteimento = <:Chat:492191006729437184> \n Música = <:MusicRecord:492106791958740993>')
 	.setFooter(`Comando solicitado por: ${message.author.username}`, message.author.avatarURL)
 	.setTimestamp();
