@@ -17,10 +17,10 @@ module.exports.run = (client, message, args) =>{
    message.react('492191006729437184')
    message.react('492106791958740993')
    
-var servidor = (reaction, user) => reaction.emoji.name === '492195623962017802' && user.id !== message.author.id
-var games = (reaction, user) => reaction.emoji.name === '492193706909106176' && user.id !== message.author.id
-var aleatorio = (reaction, user) => reaction.emoji.name === '492191006729437184' && user.id !== message.author.id
-var musica = (reaction, user) => reaction.emoji.name === '492106791958740993' && user.id !== message.author.id
+var servidor = (reaction, user) => reaction.emoji.name === ':BulletedList' && user.id !== message.author.id
+var games = (reaction, user) => reaction.emoji.name === ':R2D2:' && user.id !== message.author.id
+var aleatorio = (reaction, user) => reaction.emoji.name === ':Chat:' && user.id !== message.author.id
+var musica = (reaction, user) => reaction.emoji.name === ':MusicRecord:' && user.id !== message.author.id
 })
 
 client.on('messageReactionAdd', servidor => { 
