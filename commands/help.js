@@ -62,13 +62,13 @@ module.exports.run = async (client, message, args) => {
             case '🗒': 
 			break;
 			case '👾': 
-            message.edit(embed2)
+            r.message.edit(embed2)
 			break;
 			case '💬': 
-            message.edit(embed3)
+            r.message.edit(embed3)
 			break;
 			case '🎧': 
-            message.edit(embed4)
+            r.message.edit(embed4)
             }
             })
         }) 
