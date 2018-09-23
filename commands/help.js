@@ -11,8 +11,7 @@ module.exports.run = (client, message, args) =>{
 	.setFooter(`Comando solicitado por: ${message.author.username}`, message.author.avatarURL)
 	.setTimestamp();
 	
-	message.channel.send({menuEmbed})
-.then(message => {
+	message.channel.send(menuEmbed).then(message => {
    message.react('492195623962017802')
    message.react('492193706909106176')
    message.react('492191006729437184')
@@ -35,7 +34,7 @@ client.on('messageReactionAdd', servidor => {
         .setFooter(client.user.username, client.user.avatarURL)
 		.setTimestamp();
 
-    message.edit({embed1})
+    message.edit(embed1)
 })
 
 client.on('messageReactionAdd', games => { 
@@ -49,7 +48,7 @@ client.on('messageReactionAdd', games => {
         .setFooter(client.user.username, client.user.avatarURL)
 		.setTimestamp();
 
-    message.edit({embed2})
+    message.edit(embed2)
 })
 
 client.on('messageReactionAdd', aleatorio => { 
@@ -63,12 +62,12 @@ client.on('messageReactionAdd', aleatorio => {
         .setFooter(client.user.username, client.user.avatarURL)
 		.setTimestamp();
 
-    message.edit({embed3})
+    message.edit(embed3)
 })
 
 client.on('messageReactionAdd', musica => { 
 
-        var embed3 = new Discord.RichEmbed()
+        var embed4 = new Discord.RichEmbed()
 
         .setAuthor(`${message.author.username}`, message.author.avatarURL)
         .setTitle("Comandos de música")
@@ -77,7 +76,7 @@ client.on('messageReactionAdd', musica => {
         .setFooter(client.user.username, client.user.avatarURL)
 		.setTimestamp();
 
-    message.edit({embed3})
+    message.edit(embed4)
 })
 
 }
