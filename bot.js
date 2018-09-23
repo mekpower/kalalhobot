@@ -99,21 +99,7 @@ client.on("message", async message => {
     
     
 
-    if(!firebase.database(LevelUp)){
-        function writeUserData(userId, guildId, level, xp) {
-            userId = message.author.id;
-            guildId = message.guild.id;
-            level = 0;
-            xp = 0;
-            firebase.database().ref('vevelUp/' + userId + guildId).set({
-              level: level,
-              xp : xp
-            });
-          }
-    } else{
-        function writeUserData(userId, guildId, level, xp) {
-            userId = message.author.id;
-            guildId = message.guild.id;
+        function writeUserData2(userId, guildId, level, xp) {
             var postD = {
                 level: level,
                 xp: xp +generateXp()
@@ -122,7 +108,8 @@ client.on("message", async message => {
             updates['/levelUp/'+userId +guildId] = postD;
             return firebase.database().ref().update(updates);
         }
-    }
+        writeUserData2(message.author.id, message.guild.id, level, xp);
+ 
 
     let markCode = `\`\`\``;
     let machis = ['machista', 'MACHISTA', 'machistas', 'MACHISTAS'];
