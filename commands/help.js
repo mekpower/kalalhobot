@@ -8,7 +8,7 @@ module.exports.run = async (client, message, args) => {
 	.setTitle("Help Menu")
 	.setColor('36393e')
 	.setDescription("Cada emote é uma opção, use as reações para ir para tal menu")
-	.addField("Reações", 'Infos = 🗒 \n Games = 👾 \n Entreteimento = 💬 \n Música = 🎧')
+	.addField("Reações", 'Infos = 🗒 \n Games = 🎮 \n Entreteimento = 💬 \n Música = 🎧')
 	.setFooter(`Comando solicitado por: ${message.author.username}`, message.author.avatarURL)
 	.setTimestamp();
 	
@@ -50,28 +50,24 @@ module.exports.run = async (client, message, args) => {
 		.setTimestamp();
 
         message.channel.send(menuEmbed).then(msg2 => {
-            let paper = client.emojis.get('492195623962017802');
-            let game = client.emojis.get('492193706909106176');
-            let aleatorio = client.emojis.get('492191006729437184');
-            let musica = client.emojis.get('492106791958740993');
 
-            msg2.react(paper);
-            msg2.react(game);
-			msg2.react(aleatorio);
-			msg2.react(musica);
-        const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === 'paper' || r.emoji.name === 'game' || r.emoji.name === 'aleatorio' || r.emoji.name === 'musica') && (u.id !== client.user.id && u.id === message.author.id))
+            msg2.react('🗒');
+            msg2.react('🎮');
+			msg2.react('💬');
+			msg2.react('🎧');
+        const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '🗒' || r.emoji.name === '🎮' || r.emoji.name === '💬' || r.emoji.name === '🎧') && (u.id !== client.user.id && u.id === message.author.id))
         collector.on("collect", (r, u)=>{
             switch (r.emoji.name) {
-            case 'paper':
+            case '🗒':
             r.message.edit(embed1)
 			break;
-            case 'game': 
+            case '🎮': 
             r.message.edit(embed2)
 			break;
-            case 'aleatorio': 
+            case '💬': 
             r.message.edit(embed3)
 			break;
-            case 'musica': 
+            case '🎧': 
             r.message.edit(embed4)
             break;
             }
