@@ -17,9 +17,9 @@ module.exports.run = async (client, message, args) => {
 
         .setAuthor(`${message.author.username}`, message.author.avatarURL)
         .setTitle("Infos comandos")
-        .setDescription("Comandos de info e como usar alguns. \n `ping` , `serverinfo` , `level` , `botinfo` \n `reports` :Ex.: k&reports <@usuario> <motivo_do_report> \n `bugr` :Ex.: k&bugr <nome_do_comando> <problema_do_comando> \n `anime` :Ex>: k&anime <nome_do_anime>") 
-        .setColor(0xfffff)
-        .setFooter(client.user.username, client.user.avatarURL)
+        .setDescription("Comandos de info e como usar alguns. \n `ping` , `serverinfo` , `level` , `botinfo` \n `reports` :Ex.: k&reports <@usuario> <motivo_do_report> \n `bugr` :Ex.: k&bugr <nome_do_comando> <problema_do_comando> \n `anime` :Ex>: k&anime <nome_do_anime> \n `emoteinfo :Ex.: k&emoteinfo <nome_do_emote>`") 
+        .setColor("#fff200")
+        .setFooter(`${client.user.username} | Prefix: k&`, client.user.avatarURL)
 		.setTimestamp();
 		
 		var embed2 = new Discord.RichEmbed()
@@ -27,8 +27,8 @@ module.exports.run = async (client, message, args) => {
         .setAuthor(`${message.author.username}`, message.author.avatarURL)
         .setTitle("Games comandos")
         .setDescription("Comandos e como usar. \n `osu` :Ex.: k&osu <nome_do_jogador> \n `fort` :Ex.: k&fort <nome_do_jogador>") 
-        .setColor(0xfffff)
-        .setFooter(client.user.username, client.user.avatarURL)
+        .setColor("#bf00ff")
+        .setFooter(`${client.user.username} | Prefix: k&`, client.user.avatarURL)
 		.setTimestamp();
 		
 		var embed3 = new Discord.RichEmbed()
@@ -36,8 +36,8 @@ module.exports.run = async (client, message, args) => {
         .setAuthor(`${message.author.username}`, message.author.avatarURL)
         .setTitle("Comandos de entretenimento")
         .setDescription("Comandos simples, apenas digitálos normalmente. \n `frita` , `troll` , `change` , `proverbio`") 
-        .setColor(0xfffff)
-        .setFooter(client.user.username, client.user.avatarURL)
+        .setColor("#ffae00")
+        .setFooter(`${client.user.username} | Prefix: k&`, client.user.avatarURL)
 		.setTimestamp();
 		
 		var embed4 = new Discord.RichEmbed()
@@ -45,8 +45,8 @@ module.exports.run = async (client, message, args) => {
         .setAuthor(`${message.author.username}`, message.author.avatarURL)
         .setTitle("Comandos de música")
         .setDescription("Comandos e como usar. \n `tocar` :Ex.: k&osu <nome_da_musica \n `pular`") 
-        .setColor(0xfffff)
-        .setFooter(client.user.username, client.user.avatarURL)
+        .setColor("#00bbff")
+        .setFooter(`${client.user.username} | Prefix: k&`, client.user.avatarURL)
 		.setTimestamp();
 
         message.channel.send(menuEmbed).then(msg2 => {
