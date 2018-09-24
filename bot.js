@@ -169,6 +169,7 @@ client.on("message", async message => {
             }
 
     }
+    
 
     if(comando === "points"){
         sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
