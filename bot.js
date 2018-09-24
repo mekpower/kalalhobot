@@ -4,12 +4,13 @@ const config = require('./config.json');
 let file = require("./dataConf.json");
 let xp = require("./xp.json");
 const fs = require("fs");
-const mysql = require("mysql");
 const osu = require('node-osu');
 var anti_spam = require("discord-anti-spam");
 const kitsu = require('node-kitsu');
 const translate = require('translate');
 const firebase = require('firebase');
+const sql = require("sqlite");
+sql.open("./score.sqlite");
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
@@ -40,6 +41,8 @@ var conFire = {
 };
 firebase.initializeApp(conFire);
 let database = firebase.database();
+var ref = firebase.database().ref('levelUp');
+var levelUp = ref.child('userLvl');
 
 //I.H Fim_____________________________________________
 
@@ -116,7 +119,24 @@ client.on("message", async message => {
         );
     }
 
-    
+    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+        if (!row) {
+          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+        } else {
+          let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
+          if (curLevel > row.level) {
+            row.level = curLevel;
+            sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
+            message.reply(`Você subiu de nivel!! Nivel= **${curLevel}**! goodi jobi`);
+          }
+          sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
+        }
+      }).catch(() => {
+        console.error;
+        sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+        });
+      });
     
       if(!message.content.startsWith(config.prefix)) return;
 
@@ -150,36 +170,12 @@ client.on("message", async message => {
 
     }
 
-
-    let xpAdd = Math.floor(Math.random() * 7) + 8;
-    console.log(xpAdd);
-
-    if (!xp[message.author.id]) {
-        xp[message.author.id] = {
-            xp: 0,
-            level: 1
-        };
+    if(comando === "points"){
+        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+            if (!row) return message.reply("sadly you do not have any points yet!");
+            message.reply(`you currently have ${row.points} points, good going!`);
+          });
     }
-
-
-    let curxp = xp[message.author.id].xp;
-    let curlvl = xp[message.author.id].level;
-    let nxtLvl = xp[message.author.id].level * 300;
-    xp[message.author.id].xp = curxp + xpAdd;
-    if (nxtLvl <= xp[message.author.id].xp) {
-        xp[message.author.id].level = curlvl + 1;
-        let lvlup = new Discord.RichEmbed()
-            .setTitle("Level Up!")
-            .addField("Congrats to", `${message.author}`)
-            .setColor("#08ff00")
-            .addField("Level Atual", curlvl + 1);
-
-        message.channel.send(lvlup);
-    }
-    fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
-                if (err) console.log(err)
-    });
-
 
     if(comando === "reports"){
         let reporUs = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));

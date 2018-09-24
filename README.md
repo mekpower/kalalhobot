@@ -13,10 +13,19 @@ Kalalho é um bot discord brasileiro que usa discord.js como base. Ele tem funç
 
   Você pode ir no site [![N|Solid](https://img.shields.io/badge/discordbots-.org-%2342adf4.svg)](https://discordbots.org/bot/476011591691796490) e instalar o bot por lá.
 
+## 🛃 Comandos
+
+O bot usa o prefix **k&**. Para saber os comandos do bot use o comando **k&help**.
+
+![N|GifHelp](https://i.imgur.com/V4hmjD4.gif)
+
+
 ## 👏 Ajuda nois?
 
-Você pode ajudar doando direto no Paypal! Por enquanto só temos essa opção, talvez adicione um Patreon. 🤷
+Você pode ajudar usando o bot em seu servidor, entrando no nosso server (a gente é legal) e dando um **VOTE** no [discordbots]
 
 ## Licença
 
 Meu criador é o MekPower
+
+[discordbots]: <https://discordbots.org/bot/476011591691796490>
