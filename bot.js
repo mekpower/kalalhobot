@@ -11,6 +11,11 @@ const translate = require('translate');
 const firebase = require('firebase');
 const sql = require("sqlite");
 sql.open("./score.sqlite");
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/Money",{
+    useNewUrlParser: true
+});
+const Money = require("./money.js");
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
@@ -119,6 +124,26 @@ client.on("message", async message => {
         );
     }
 
+    let coinsAdd = Math.ceil(Math.random() * 50);
+    Money.findOne({
+        userID: message.author.id, 
+        serverID: message.guild.id
+    }, (err, money) => {
+        if(err) console.log(err);
+        if(!money){
+            const newMoney = new Money({
+                userID: message.author.id,
+                serverID: message.guild.id,
+                money: coinsAdd
+            })
+
+            newMoney.save().catch(err => console.log(err));
+        }else{
+            money.money = money.money + coinsAdd;
+            money.save().catch(err => console.log(err));
+        }
+    })
+
     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
         if (!row) {
           sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
@@ -169,7 +194,7 @@ client.on("message", async message => {
             }
 
     }
-    
+
 
     if(comando === "points"){
         sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
