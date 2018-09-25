@@ -10,7 +10,7 @@ const kitsu = require('node-kitsu');
 const translate = require('translate');
 const firebase = require('firebase');
 const sql = require("sqlite");
-sql.open("./score.sqlite");
+sql.open("./data/score.sqlite");
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/Money",{
     useNewUrlParser: true
