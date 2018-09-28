@@ -152,7 +152,6 @@ client.on("message", async message => {
           if (curLevel > row.level) {
             row.level = curLevel;
             sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-            message.reply(`Você subiu de nivel!! Nivel= **${curLevel}**! goodi jobi`);
           }
           sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
         }
