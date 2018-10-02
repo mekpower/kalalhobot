@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports.run = async (client, message, args) =>{
     if(message.guild.id === '330332382362337281'){
 
-        let cargoEmbed = Discord.RichEmbed()
+        let cargoEmbed = new Discord.RichEmbed()
     .seTitle("Cargos Disponíveis")
     .setDescription("Use as reações referentes")
     .addField("<./devHelper.js> 💻", "Se você é dev de JavaScript, use a reação 💻")
