@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) =>{
     if(message.guild.id === '330332382362337281'){
 
         let cargoEmbed = new Discord.RichEmbed()
-    .seTitle("Cargos Disponíveis")
+    .setTitle("Cargos Disponíveis")
     .setDescription("Use as reações referentes")
     .addField("<./devHelper.js> 💻", "Se você é dev de JavaScript, use a reação 💻")
     .addField("<./devHelper.ino> ⚙️", "Se você é dev de Arduino, use a reação ⚙️")
