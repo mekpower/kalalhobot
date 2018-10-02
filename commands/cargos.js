@@ -7,27 +7,27 @@ module.exports.run = async (client, message, args) =>{
     .setTitle("Cargos Disponíveis")
     .setDescription("Use as reações referentes")
     .addField("<./devHelper.js> 💻", "Se você é dev de JavaScript, use a reação 💻")
-    .addField("<./devHelper.ino> ⚙️", "Se você é dev de Arduino, use a reação ⚙️")
+    .addField("<./devHelper.ino> ⚙", "Se você é dev de Arduino, use a reação ⚙")
     .addField("<./devHelper.c> 🖥", "Se você é dev de Arduino, use a reação 🖥")
-    .addField("<./devHelper.jar> ☕️", "Se você é dev de Java, use a reação ☕️")
+    .addField("<./devHelper.jar> ☕", "Se você é dev de Java, use a reação ☕️")
     .addField("haigui elu 🔝", "Se você é claramente um high elo bolado 1v9, use a reação 🔝")
     .setTimestamp();
 
     message.channel.send(cargoEmbed).then(msg2 => {
 
         msg2.react('💻');
-        msg2.react('⚙️');
+        msg2.react('⚙');
         msg2.react('🖥');
-        msg2.react('☕️');
+        msg2.react('☕');
         msg2.react('🔝');
-    const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '💻' || r.emoji.name === '⚙️' || r.emoji.name === '🖥' || r.emoji.name === '☕️' || r.emoji.name === '🔝') && (u.id !== client.user.id && u.id === message.author.id))
+    const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '💻' || r.emoji.name === '⚙' || r.emoji.name === '🖥' || r.emoji.name === '☕' || r.emoji.name === '🔝') && (u.id !== client.user.id && u.id === message.author.id))
     collector.on("collect", (r, u)=>{
         switch (r.emoji.name) {
         case '💻':
         let gRole = message.guild.roles.find(`name`, `<./devHelper.js> 💻`)
         await(message.author.addRole(gRole.id))
         break;
-        case '⚙️': 
+        case '⚙': 
         let gRole2 = message.guild.roles.find(`name`, `<./devHelper.ino> ⚙️`)
         await(message.author.addRole(gRole2.id))
         break;
@@ -35,7 +35,7 @@ module.exports.run = async (client, message, args) =>{
         let gRole3 = message.guild.roles.find(`name`, `<./devHelper.c> 🖥`)
         await(message.author.addRole(gRole3.id))
         break;
-        case '☕️': 
+        case '☕': 
         let gRole4 = message.guild.roles.find(`name`, `<./devHelper.jar> ☕️`)
         await(message.author.addRole(gRole4.id))
         break;
