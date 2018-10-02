@@ -25,23 +25,23 @@ module.exports.run = async (client, message, args) =>{
         switch (r.emoji.name) {
         case '💻':
         let gRole = message.guild.roles.find(`name`, `<./devHelper.js> 💻`)
-        await(message.author.addRole(gRole.id))
+        return(message.author.addRole(gRole.id))
         break;
         case '⚙': 
         let gRole2 = message.guild.roles.find(`name`, `<./devHelper.ino> ⚙️`)
-        await(message.author.addRole(gRole2.id))
+        return(message.author.addRole(gRole2.id))
         break;
         case '🖥': 
         let gRole3 = message.guild.roles.find(`name`, `<./devHelper.c> 🖥`)
-        await(message.author.addRole(gRole3.id))
+        return(message.author.addRole(gRole3.id))
         break;
         case '☕': 
         let gRole4 = message.guild.roles.find(`name`, `<./devHelper.jar> ☕️`)
-        await(message.author.addRole(gRole4.id))
+        return(message.author.addRole(gRole4.id))
         break;
         case '🔝': 
         let gRole5 = message.guild.roles.find(`name`, `haigui elu 🔝`)
-        await(message.author.addRole(gRole5.id))
+        return(message.author.addRole(gRole5.id))
         break;
         }
         })
