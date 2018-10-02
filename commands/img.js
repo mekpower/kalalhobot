@@ -15,9 +15,10 @@ module.exports.run = (client, message, args) =>{
         return Promise.all(jimps);
     }).then(function(data) {
         data[0].composite(data[1],0,0);
-        data[0].composite(data[2],0,0);
 
-        message.channel.send(data[0]);
+        message.channel.send(data[0].write(finalName, (err) => {
+            return cb(null, `img.png`);
+        }));
     });
 
 }
