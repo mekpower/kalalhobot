@@ -23,27 +23,27 @@ module.exports.run = async (client, message, args) =>{
 
     client.on('messageReactionAdd', (reaction, user) => {
         if(reaction.emoji.name == "💻" && user.id !== client.user.id){
-            let gRole = message.guild.roles.find(c => c.name == '<./devHelper.js> 💻')
+            let gRole = message.guild.roles.find('name', '<./devHelper.js> 💻')
         message.member.addRole(gRole)
         }
     
         if(reaction.emoji.name == "⚙" && user.id !== client.user.id){
-            let gRole2 = message.guild.roles.find(c => c.name == '<./devHelper.ino> ⚙')
+            let gRole2 = message.guild.roles.find('name', '<./devHelper.ino> ⚙')
             message.member.addRole(gRole2)
         }
     
         if(reaction.emoji.name == "🖥" && user.id !== client.user.id){
-            let gRole3 = message.guild.roles.find(c => c.name == '<./devHelper.c> 🖥')
+            let gRole3 = message.guild.roles.find('name',  '<./devHelper.c> 🖥')
             message.member.addRole(gRole3)
         }
     
         if(reaction.emoji.name == "☕" && user.id !== client.user.id){
-            let gRole4 = message.guild.roles.find(c => c.name == '<./devHelper.jar> ☕')
+            let gRole4 = message.guild.roles.find('name', '<./devHelper.jar> ☕')
             message.member.addRole(gRole4)
         }
     
         if(reaction.emoji.name == "🔝" && user.id !== client.user.id){
-            let gRole5 = message.guild.roles.find(c => c.name == 'haigui elu 🔝')
+            let gRole5 = message.guild.roles.find('name', 'haigui elu 🔝')
             message.member.addRole(gRole5)
         }
     })
