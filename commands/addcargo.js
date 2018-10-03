@@ -22,7 +22,7 @@ module.exports.run = async (client, message, args) =>{
     })
 }
 
-bot.on('messageReactionAdd', (reaction, user) => {
+client.on('messageReactionAdd', (reaction, user) => {
     if(reaction.emoji.name == "💻" && user.id !== client.user.id){
     message.member.addRole("<./devHelper.js> 💻")
     }
