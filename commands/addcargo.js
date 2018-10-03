@@ -23,7 +23,7 @@ module.exports.run = async (client, message, args) =>{
         msg2.react('🔝');
     const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '💻' || r.emoji.name === '⚙' || r.emoji.name === '🖥' || r.emoji.name === '☕' || r.emoji.name === '🔝') && (u.id !== client.user.id && u.id === message.author.id))
     collector.on("collect", (r, u)=>{
-        var user = message.guild.members.get(user.id);
+        var user = message.author.id;
         switch (r.emoji.name) {
         case '💻':
         let gRole = message.guild.roles.find(`name`, `<./devHelper.js> 💻`)
