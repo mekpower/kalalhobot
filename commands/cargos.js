@@ -4,7 +4,7 @@ module.exports.run = async (client, message, args) =>{
     
     let serverembed = new Discord.RichEmbed()
     .setColor('RANDOM')
-    .addField("Server Roles",` ${message.guild.roles.size} Roles  \n Names : ${message.guild.roles.array()}`,true)
+    .addField("Cargos do Server",` ${message.guild.roles.size} Roles  \n Names : ${message.guild.roles.array()}`,true)
     .setTimestamp()
     .setFooter(`${message.author.username}#${message.author.discriminator}`,message.author.displayAvatarURL);
 
