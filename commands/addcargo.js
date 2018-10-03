@@ -29,22 +29,22 @@ module.exports.run = async (client, message, args) =>{
     
         if(reaction.emoji.name == "⚙" && user.id !== client.user.id){
             let gRole2 = message.guild.roles.find('name', '<./devHelper.ino> ⚙')
-            message.member.addRole(gRole2)
+            guildMember.addRole(gRole2)
         }
     
         if(reaction.emoji.name == "🖥" && user.id !== client.user.id){
             let gRole3 = message.guild.roles.find('name',  '<./devHelper.c> 🖥')
-            message.member.addRole(gRole3)
+            guildMember.addRole(gRole3)
         }
     
         if(reaction.emoji.name == "☕" && user.id !== client.user.id){
             let gRole4 = message.guild.roles.find('name', '<./devHelper.jar> ☕')
-            message.member.addRole(gRole4)
+            guildMember.addRole(gRole4)
         }
     
         if(reaction.emoji.name == "🔝" && user.id !== client.user.id){
             let gRole5 = message.guild.roles.find('name', 'haigui elu 🔝')
-            message.member.addRole(gRole5)
+            guildMember.addRole(gRole5)
         }
     })
 }
