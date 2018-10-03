@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) =>{
     
-    if(message.guild.id === '330332382362337281'){
 
         let cargoEmbed = new Discord.RichEmbed()
     .setTitle("Cargos Disponíveis")
@@ -15,43 +14,32 @@ module.exports.run = async (client, message, args) =>{
     .setTimestamp();
 
     message.channel.send(cargoEmbed).then(msg2 => {
-
         msg2.react('💻');
         msg2.react('⚙');
         msg2.react('🖥');
         msg2.react('☕');
         msg2.react('🔝');
-    const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '💻' || r.emoji.name === '⚙' || r.emoji.name === '🖥' || r.emoji.name === '☕' || r.emoji.name === '🔝') && (u.id !== client.user.id && u.id === message.author.id))
-    collector.on("collect", async (r, u)=>{
-        var user = message.author.id;
-        switch (r.emoji.name) {
-        case '💻':
-        let gRole = message.guild.roles.find(c => c.name == '<./devHelper.js> 💻')
-        await guildMember.addRole(gRole).then((err) => console.log(err))
-        break;
-        case '⚙': 
-        let gRole2 = message.guild.roles.find(c => c.name == '<./devHelper.ino> ⚙')
-        await guildMember.addRole(gRole2).then(() => console.log(err))
-        break;
-        case '🖥': 
-        let gRole3 = message.guild.roles.find(c => c.name == '<./devHelper.c> 🖥')
-        await guildMember.addRole(gRole3).then(() => console.log(err))
-        break;
-        case '☕': 
-        let gRole4 = message.guild.roles.find(c => c.name == '<./devHelper.jar> ☕')
-        await guildMember.addRole(gRole4).then(() => console.log(err))
-        break;
-        case '🔝': 
-        let gRole5 = message.guild.roles.find(c => c.name == 'haigui elu 🔝')
-        await guildMember.addRole(gRole5).then(() => console.log(err))
-        break;
-        }
-        })
     })
-
-    }else{
-        message.channel.send("Esse comando está funcionando apenas no Servidor do criador do bot");
-    }
-    
-
 }
+
+bot.on('messageReactionAdd', (reaction, user) => {
+    if(reaction.emoji.name == "💻" && user.id !== client.user.id){
+    message.member.addRole("<./devHelper.js> 💻")
+    }
+
+    if(reaction.emoji.name == "⚙" && user.id !== client.user.id){
+        message.member.addRole("<./devHelper.ino> ⚙")
+    }
+
+    if(reaction.emoji.name == "🖥" && user.id !== client.user.id){
+        message.member.addRole("<./devHelper.c> 🖥")
+    }
+
+    if(reaction.emoji.name == "☕" && user.id !== client.user.id){
+        message.member.addRole("<./devHelper.jar> ☕")
+    }
+
+    if(reaction.emoji.name == "🔝" && user.id !== client.user.id){
+        message.member.addRole("haigui elu 🔝")
+    }
+})
