@@ -22,28 +22,28 @@ module.exports.run = async (client, message, args) =>{
         msg2.react('☕');
         msg2.react('🔝');
     const collector = msg2.createReactionCollector((r, u) => (r.emoji.name === '💻' || r.emoji.name === '⚙' || r.emoji.name === '🖥' || r.emoji.name === '☕' || r.emoji.name === '🔝') && (u.id !== client.user.id && u.id === message.author.id))
-    collector.on("collect", (r, u)=>{
+    collector.on("collect", async (r, u)=>{
         var user = message.author.id;
         switch (r.emoji.name) {
         case '💻':
-        let gRole = message.guild.roles.find(`name`, `<./devHelper.js> 💻`)
-        r.user.addRole(gRole).then(() => console.log(err))
+        let gRole = message.guild.roles.find(c => c.name == '<./devHelper.js> 💻')
+        await guildMember.addRole(gRole).then((err) => console.log(err))
         break;
         case '⚙': 
-        let gRole2 = message.guild.roles.find(`name`, `<./devHelper.ino> ⚙️`)
-        r.user.addRole(gRole2).then(() => console.log(err))
+        let gRole2 = message.guild.roles.find(c => c.name == '<./devHelper.ino> ⚙')
+        await guildMember.addRole(gRole2).then(() => console.log(err))
         break;
         case '🖥': 
-        let gRole3 = message.guild.roles.find(`name`, `<./devHelper.c> 🖥`)
-        r.user.addRole(gRole3).then(() => console.log(err))
+        let gRole3 = message.guild.roles.find(c => c.name == '<./devHelper.c> 🖥')
+        await guildMember.addRole(gRole3).then(() => console.log(err))
         break;
         case '☕': 
-        let gRole4 = message.guild.roles.find(`name`, `<./devHelper.jar> ☕️`)
-        r.user.addRole(gRole4).then(() => console.log(err))
+        let gRole4 = message.guild.roles.find(c => c.name == '<./devHelper.jar> ☕')
+        await guildMember.addRole(gRole4).then(() => console.log(err))
         break;
         case '🔝': 
-        let gRole5 = message.guild.roles.find(`name`, `haigui elu 🔝`)
-        r.user.addRole(gRole5).then(() => console.log(err))
+        let gRole5 = message.guild.roles.find(c => c.name == 'haigui elu 🔝')
+        await guildMember.addRole(gRole5).then(() => console.log(err))
         break;
         }
         })
