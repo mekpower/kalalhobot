@@ -20,26 +20,27 @@ module.exports.run = async (client, message, args) =>{
         msg2.react('☕');
         msg2.react('🔝');
     })
+
+    client.on('messageReactionAdd', (reaction, user) => {
+        if(reaction.emoji.name == "💻" && user.id !== client.user.id){
+        message.member.addRole("<./devHelper.js> 💻")
+        }
+    
+        if(reaction.emoji.name == "⚙" && user.id !== client.user.id){
+            message.member.addRole("<./devHelper.ino> ⚙")
+        }
+    
+        if(reaction.emoji.name == "🖥" && user.id !== client.user.id){
+            message.member.addRole("<./devHelper.c> 🖥")
+        }
+    
+        if(reaction.emoji.name == "☕" && user.id !== client.user.id){
+            message.member.addRole("<./devHelper.jar> ☕")
+        }
+    
+        if(reaction.emoji.name == "🔝" && user.id !== client.user.id){
+            message.member.addRole("haigui elu 🔝")
+        }
+    })
 }
 
-client.on('messageReactionAdd', (reaction, user) => {
-    if(reaction.emoji.name == "💻" && user.id !== client.user.id){
-    message.member.addRole("<./devHelper.js> 💻")
-    }
-
-    if(reaction.emoji.name == "⚙" && user.id !== client.user.id){
-        message.member.addRole("<./devHelper.ino> ⚙")
-    }
-
-    if(reaction.emoji.name == "🖥" && user.id !== client.user.id){
-        message.member.addRole("<./devHelper.c> 🖥")
-    }
-
-    if(reaction.emoji.name == "☕" && user.id !== client.user.id){
-        message.member.addRole("<./devHelper.jar> ☕")
-    }
-
-    if(reaction.emoji.name == "🔝" && user.id !== client.user.id){
-        message.member.addRole("haigui elu 🔝")
-    }
-})
