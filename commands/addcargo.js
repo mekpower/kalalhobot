@@ -24,27 +24,27 @@ module.exports.run = async (client, message, args) =>{
     client.on('messageReactionAdd', (reaction, user) => {
         if(reaction.emoji.name == "💻" && user.id !== client.user.id){
             let gRole = message.guild.roles.find('name', '<./devHelper.js> 💻')
-        message.member.addRole(gRole)
+            message.guildMember.addRole(gRole)
         }
     
         if(reaction.emoji.name == "⚙" && user.id !== client.user.id){
             let gRole2 = message.guild.roles.find('name', '<./devHelper.ino> ⚙')
-            guildMember.addRole(gRole2)
+            message.guildMember.addRole(gRole2)
         }
     
         if(reaction.emoji.name == "🖥" && user.id !== client.user.id){
             let gRole3 = message.guild.roles.find('name',  '<./devHelper.c> 🖥')
-            guildMember.addRole(gRole3)
+            message.guildMember.addRole(gRole3)
         }
     
         if(reaction.emoji.name == "☕" && user.id !== client.user.id){
             let gRole4 = message.guild.roles.find('name', '<./devHelper.jar> ☕')
-            guildMember.addRole(gRole4)
+            message.guildMember.addRole(gRole4)
         }
     
         if(reaction.emoji.name == "🔝" && user.id !== client.user.id){
             let gRole5 = message.guild.roles.find('name', 'haigui elu 🔝')
-            guildMember.addRole(gRole5)
+            message.guildMember.addRole(gRole5)
         }
     })
 }
