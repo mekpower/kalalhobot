@@ -12,29 +12,29 @@ message.channel.send(a).then(msg => {
     msg.react("🔝")
     })
 }
-client.on('messageReactionAdd', (reaction, user) => {
-    if(reaction.emoji.name == "💻" && user.id !== client.user.id){
-        let gRole = message.guild.roles.find(c => c.name == '<./devHelper.js> 💻').id
-        message.member.addRole(gRole)
+client.on('raw', event => {
+    if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
+        
+        let channel = client.channels.get(event.d.channel_id);
+        let message = channel.fetchMessage(event.d.message_id).then(msg=> {
+        let user = msg.guild.members.get(event.d.user_id);
+        
+        if (msg.author.id == client.user.id && msg.content != initialMessage){
+       
+            var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+            var role = msg.content.match(re)[1];
+        
+            if (user.id != client.user.id){
+                var roleObj = msg.guild.roles.find(r => r.name === role);
+                var memberObj = msg.guild.members.get(user.id);
+                
+                if (event.t === "MESSAGE_REACTION_ADD"){
+                    memberObj.addRole(roleObj)
+                } else {
+                    memberObj.removeRole(roleObj);
+                }
+            }
+        }
+        })
     }
-
-    if(reaction.emoji.name == "⚙" && user.id !== client.user.id){
-        let gRole = message.guild.roles.find(c => c.name == '<./devHelper.ino> ⚙️').id
-        message.member.addRole(gRole)
-    }
-
-    if(reaction.emoji.name == "🖥" && user.id !== client.user.id){
-        let gRole = message.guild.roles.find(c => c.name == '<./devHelper.c> ©️').id
-        message.member.addRole(gRole)
-    }
-
-    if(reaction.emoji.name == "☕" && user.id !== client.user.id){
-        let gRole = message.guild.roles.find(c => c.name == '<./devHelper.jar> ☕️').id
-        message.member.addRole(gRole)
-    }
-
-    if(reaction.emoji.name == "🔝" && user.id !== client.user.id){
-        let gRole = message.guild.roles.find(c => c.name == 'haigui elu 🔝').id
-        message.member.addRole(gRole)
-    }
-})
+    })
