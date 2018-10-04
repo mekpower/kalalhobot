@@ -99,6 +99,7 @@ function clean(text) {
 
 const roles = ["<./devHelper.js> 💻", "<./devHelper.ino> ⚙️", "<./devHelper.c> 🖥", "<./devHelper.jar> ☕️", "haigui elu 🔝"];
 const reactions = ["💻", "⚙️", "🖥", "☕️", "🔝"];
+let initialMessage = `**Rse as reações aparentes para adicionar o cargo!**`;
 
 function generateMessages(){
     var messages = [];
