@@ -1,6 +1,9 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
 const roles = ["Hacker", "Artist", "Public Relations", "haigui elu 🔝"];
+const reactions = ["💻", "🖌", "😃", "🆕"];
+
+
 exports.run = (client, message, args) => {
 const a = new Discord.RichEmbed()
 .setTitle("ReactRoles")

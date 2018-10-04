@@ -97,6 +97,16 @@ function clean(text) {
     return text;
     }
 
+const roles = ["<./devHelper.js> 💻", "<./devHelper.ino> ⚙️", "<./devHelper.c> 🖥", "<./devHelper.jar> ☕️", "haigui elu 🔝"];
+const reactions = ["💻", "⚙️", "🖥", "☕️", "🔝"];
+
+function generateMessages(){
+    var messages = [];
+    messages.push(initialMessage);
+    for (let role of roles) messages.push(`Use a reação para conseguir o cargo **"${role}"**!`); //DONT CHANGE THIS
+    return messages;
+}
+
 
 client.on("message", async message => {
     if(message.author.bot) return;
@@ -123,46 +133,8 @@ client.on("message", async message => {
             file: "http://1.bp.blogspot.com/-WMforG0sFvo/VaFKsvFinfI/AAAAAAAAQa0/dZpdkIEKoxU/s1600/MACHISTAS%2BNAO%2BPASSARAO.JPG"} 
         );
     }
-
-    let coinsAdd = Math.ceil(Math.random() * 50);
-    Money.findOne({
-        userID: message.author.id, 
-        serverID: message.guild.id
-    }, (err, money) => {
-        if(err) console.log(err);
-        if(!money){
-            const newMoney = new Money({
-                userID: message.author.id,
-                serverID: message.guild.id,
-                money: coinsAdd
-            })
-
-            newMoney.save().catch(err => console.log(err));
-        }else{
-            money.money = money.money + coinsAdd;
-            money.save().catch(err => console.log(err));
-        }
-    })
-
-    sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-        if (!row) {
-          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-        } else {
-          let curLevel = Math.floor(0.1 * Math.sqrt(row.points + 1));
-          if (curLevel > row.level) {
-            row.level = curLevel;
-            sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-          }
-          sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-        }
-      }).catch(() => {
-        console.error;
-        sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-        });
-      });
     
-      if(!message.content.startsWith(config.prefix)) return;
+    if(!message.content.startsWith(config.prefix)) return;
 
     if(comando === "ping"){
         const m = await message.channel.send("ping?");
@@ -200,6 +172,17 @@ client.on("message", async message => {
 
     }
 
+    if (comando === "gcargo"){
+        var toSend = generateMessages();
+        let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+        for (let mapObj of mappedArray){
+            message.channel.send(mapObj[0]).then( sent => {
+                if (mapObj[1]){
+                  sent.react(mapObj[1]);  
+                } 
+            });
+        }
+    }
 
     if(comando === "points"){
         sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
@@ -289,4 +272,32 @@ anti_spam(bot, {
     banMessage: "A palavra que você estava spammando foi cinzada e botada na lista negra",
     maxDuplicatesWarning: 7,
     maxDuplicatesBan: 10
+});
+
+client.on('raw', event => {
+    if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
+        
+        let channel = client.channels.get(event.d.channel_id);
+        let message = channel.fetchMessage(event.d.message_id).then(msg=> {
+        let user = msg.guild.members.get(event.d.user_id);
+        
+        if (msg.author.id == client.user.id && msg.content != initialMessage){
+       
+            var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+            var role = msg.content.match(re)[1];
+        
+            if (user.id != bot.user.id){
+                var roleObj = msg.guild.roles.find(r => r.name === role);
+                var memberObj = msg.guild.members.get(user.id);
+                
+                if (event.t === "MESSAGE_REACTION_ADD"){
+                    memberObj.addRole(roleObj)
+                } else {
+                    memberObj.removeRole(roleObj);
+                }
+            }
+        }
+        })
+ 
+    }   
 });
