@@ -4,7 +4,7 @@ const client = new Discord.Client();
 
 exports.run = (client, message, args) => {
     
-    let jg = message.guild.roles.find(c => c.name == 'haigui elu :top:');
+    let jg = message.guild.roles.find(c => c.name == 'haigui elu 🔝');
 
     if(args[0]){
 
@@ -17,11 +17,11 @@ exports.run = (client, message, args) => {
         .setTimestamp()
         .setFooter(`${message.author.username}#${message.author.discriminator}`,message.author.displayAvatarURL);
 
-        if(args[0]=== "lol" || "league of legends") a.addField("Game", `<:LeagueofLegends:497632559468118037> ${args[0]}`, true);
-        if(args[0]=== "pubg" || "PUBG" || "pub" || "PUB") a.addField("Game", `<:PUBG:497632603864563712> ${args[0]}`, true);
-        if(args[0]=== "fortnite" || "Fortnite") a.addField("Game", `<:Fortnite:492468035559620628> ${args[0]}`, true);
-        if(args[0]=== "Overwatch" || "overwatch") a.addField("Game", `<:Overwatch:497632658545967154> ${args[0]}`, true);
-        if(args[0]=== "Minecraft" || "minecraft") a.addField("Game", `<:Minecraft:497632635997126656> ${args[0]}`, true);
+        if(args[0] == "lol" || "league of legends") a.addField("Game", `<:LeagueofLegends:497632559468118037> ${args[0]}`, true);
+        if(args[0] == "pubg" || "PUBG" || "pub" || "PUB") a.addField("Game", `<:PUBG:497632603864563712> ${args[0]}`, true);
+        if(args[0] == "fortnite" || "Fortnite") a.addField("Game", `<:Fortnite:492468035559620628> ${args[0]}`, true);
+        if(args[0] == "Overwatch" || "overwatch") a.addField("Game", `<:Overwatch:497632658545967154> ${args[0]}`, true);
+        if(args[0] == "Minecraft" || "minecraft") a.addField("Game", `<:Minecraft:497632635997126656> ${args[0]}`, true);
 
 
         message.channel.send(a);
