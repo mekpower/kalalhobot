@@ -22,8 +22,9 @@ exports.run = (client, message, args) => {
         else if(args[0] == "fortnite" || "Fortnite") a.addField("Game", `<:Fortnite:492468035559620628> ${args[0]}`, true);
         else if(args[0] == "Overwatch" || "overwatch") a.addField("Game", `<:Overwatch:497632658545967154> ${args[0]}`, true);
         else if(args[0] == "Minecraft" || "minecraft") a.addField("Game", `<:Minecraft:497632635997126656> ${args[0]}`, true);
+        else a.addField("Game", `${args[0]}`, true);
 
-
+        a.addField("Vagas", `${args[1]}`, true);
         message.channel.send(a);
 
     }
