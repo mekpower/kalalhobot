@@ -99,12 +99,12 @@ function clean(text) {
 
 const roles = ["<./devHelper.js> 💻", "<./devHelper.ino> ⚙️", "<./devHelper.c> 🖥", "<./devHelper.jar> ☕️", "haigui elu 🔝"];
 const reactions = ["💻", "⚙️", "🖥", "☕️", "🔝"];
-let initialMessage = `**Rse as reações aparentes para adicionar o cargo!**`;
+let initialMessage = `**Use as reações aparentes para adicionar o cargo!**`;
 
 function generateMessages(){
     var messages = [];
     messages.push(initialMessage);
-    for (let role of roles) messages.push(`Use a reação para conseguir o cargo **"${role}"**!`); //DONT CHANGE THIS
+    for (let role of roles) messages.push(`React below to get the **"${role}"** role!`); //DONT CHANGE THIS
     return messages;
 }
 
@@ -287,7 +287,7 @@ client.on('raw', event => {
             var re = `\\*\\*"(.+)?(?="\\*\\*)`;
             var role = msg.content.match(re)[1];
         
-            if (user.id != bot.user.id){
+            if (user.id != client.user.id){
                 var roleObj = msg.guild.roles.find(r => r.name === role);
                 var memberObj = msg.guild.members.get(user.id);
                 
