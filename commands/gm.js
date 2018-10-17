@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
+let markCode = `\`\`\``;
 
 
 exports.run = (client, message, args) => {
@@ -13,14 +14,14 @@ exports.run = (client, message, args) => {
         .setDescription("Bora jogar rapeizeee")
         .setColor('#42f445')
         .addField("Convocados", `${jg}`,true)
-        .addField("Game", `${args[0]}`, true)
+        .addField("Game", `${markCode}${args[0]}${markCode}`, true)
         .setImage("http://38.media.tumblr.com/tumblr_lyr9gkpYgw1r6yetao3_500.gif")
         .setTimestamp()
         .setFooter(`${message.author.username}#${message.author.discriminator}`,message.author.displayAvatarURL);
 
         
 
-        a.addField("Vagas", `${args[1]}`, true);
+        a.addField("Vagas", `${markCode}js \n${args[1]}${markCode}`, true);
         message.channel.send(a);
 
     }
