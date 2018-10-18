@@ -14,5 +14,7 @@ exports.run = (client, message, args) => {
 	.setAuthor("RANK: "+ user.username, user.avatarURL)
 	.addField("LEVEL", level)
 	.addField("XP", xp)
-	.setTimestamp()
+    .setTimestamp()
+    
+    message.channel.send(pref);
 }
