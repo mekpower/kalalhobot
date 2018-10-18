@@ -8,14 +8,12 @@ const osu = require('node-osu');
 var anti_spam = require("discord-anti-spam");
 const kitsu = require('node-kitsu');
 const translate = require('translate');
-const firebase = require('firebase');
-const sql = require("sqlite");
-sql.open("./data/score.sqlite");
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/Money",{
-    useNewUrlParser: true
+const admin = require('firebase-admin');
+const serviceAccount = require('./KalalhoBot-dd8863b69b9b.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
 });
-const Money = require("./money.js");
+const db = admin.firestore();
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
@@ -36,18 +34,7 @@ var osuApi = new osu.Api(osuAPIkey, {
     completeScores: false
 })
 
-var conFire = {
-    apiKey: "AIzaSyC77kFnklIYoUqxYfITANH2xkw-fg4gj4M",
-    authDomain: "kalalhobot.firebaseapp.com",
-    databaseURL: "https://kalalhobot.firebaseio.com",
-    projectId: "kalalhobot",
-    storageBucket: "kalalhobot.appspot.com",
-    messagingSenderId: "706863315399"
-};
-firebase.initializeApp(conFire);
-let database = firebase.database();
-var ref = firebase.database().ref('levelUp');
-var levelUp = ref.child('userLvl');
+
 
 //I.H Fim_____________________________________________
 
@@ -135,6 +122,19 @@ client.on("message", async message => {
         );
     }
     
+    getQuote().then(result => {
+        console.log(result);
+        const quoteData ={
+            user: message.author.id,
+            guild: message.guild.id,
+            exp: +generateXp()
+        }
+        return db.collection('sampleData').doc('inspiration')
+        .set(quoteData).then(()=>{
+            console.log('new user db')
+        })
+    })
+
     if(!message.content.startsWith(config.prefix)) return;
 
     if(comando === "ping"){
@@ -183,13 +183,6 @@ client.on("message", async message => {
                 } 
             });
         }
-    }
-
-    if(comando === "points"){
-        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-            if (!row) return message.reply("sadly you do not have any points yet!");
-            message.reply(`you currently have ${row.points} points, good going!`);
-          });
     }
 
     if(comando === "reports"){
