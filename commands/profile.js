@@ -4,7 +4,8 @@ const db = require('quick.db');
 exports.run = async (client, message, args) => {
 	let user = message.author;
     
-    let balance = await db.fetch(`userBalance_${user.id}`)
+    let balance = await db.fetch(`userBalance_${user.id}`);
+    if(balance === null) balance = 50;
 	let exp = await db.fetch(`exp_${user.id}`);
 	if(exp === null) exp = 0;
 	let level = await db.fetch(`level_${user.id}`);

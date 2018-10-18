@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
         message.channel.send(lastDailyEmbed)
     } else {
         db.set(`lastDaily_${message.author.id}`, Date.now());
-        db.add(`userBalance_${message.member.id}`, amount).then(i => {
+        db.add(`userBalance_${message.member.id}`, amount).then(() => {
           var discord = require('discord.js')
           var embed = new Discord.RichEmbed()
           .setTitle('<:MoneyBox:502477991595474969> Daily de hoje')
