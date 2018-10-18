@@ -119,7 +119,8 @@ client.on("message", async message => {
     }
     
    //LEVEL SYSTEM
-
+   let user = message.author;
+   
    let exp = await db.fetch(`exp_${user.id}`);
    if(exp === null) exp = 0;
    let level = await db.fetch(`level_${user.id}`);
