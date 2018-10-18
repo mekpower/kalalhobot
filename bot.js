@@ -128,12 +128,12 @@ client.on("message", async message => {
    
    let nxtLevel = exp * 300;
    
-   if(!cooldown.is(user.id)){
-       cooldown.add(user.id);
+   if(!is(user.id)){
+       add(user.id);
        db.add(`exp_${user.id}`, generateXp());
        
        setTimeout(() =>{
-           cooldown.remove(user.id);
+           remove(user.id);
        },1000*20);
    }
    
@@ -313,3 +313,18 @@ client.on('raw', event => {
  
     }   
 });
+
+
+let array = [];
+
+function add(id){
+	array.push(id);
+}
+
+function remove(id){
+	array.splice(array.indexOf(id),1);
+}
+
+function is(id){
+	return array.includes(id);
+}
