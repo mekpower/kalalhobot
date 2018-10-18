@@ -16,5 +16,5 @@ exports.run = (client, message, args) => {
 	.addField("XP", xp)
     .setTimestamp()
     
-    message.channel.send(pref);
+    message.channel.send(perf);
 }
