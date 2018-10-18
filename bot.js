@@ -8,12 +8,8 @@ const osu = require('node-osu');
 var anti_spam = require("discord-anti-spam");
 const kitsu = require('node-kitsu');
 const translate = require('translate');
-const admin = require('firebase-admin');
-const serviceAccount = require('./KalalhoBot-dd8863b69b9b.json');
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-const db = admin.firestore();
+const db = require("quick.db");
+const cooldown = require("./cooldown.js");
 
 //IMPORTS DO HOST_______________________________________
 const token = process.env.token;
@@ -122,18 +118,39 @@ client.on("message", async message => {
         );
     }
     
-    getQuote().then(result => {
-        console.log(result);
-        const quoteData ={
-            user: message.author.id,
-            guild: message.guild.id,
-            exp: +generateXp()
-        }
-        return db.collection('sampleData').doc('inspiration')
-        .set(quoteData).then(()=>{
-            console.log('new user db')
-        })
-    })
+   //LEVEL SYSTEM
+
+   let exp = await db.fetch(`exp_${user.id}`);
+   if(exp === null) exp = 0;
+   let level = await db.fetch(`level_${user.id}`);
+   if(level === null) level = 0;
+   
+   let nxtLevel = exp * 300;
+   
+   if(!cooldown.is(user.id)){
+       cooldown.add(user.id);
+       db.add(`exp_${user.id}`, generateXP());
+       
+       setTimeout(() =>{
+           cooldown.remove(user.id);
+       },1000*20);
+   }
+   
+   while(xp>= nxtLevel){
+       if(xp >= nxtLevel){
+           
+           db.add(`level_${user.id}`, 1);
+           xp = await db.fetch(`exp_${user.id}`);
+           level = await db.fetch(`level_${user.id}`);
+           
+           let Lembed = new Discord.RichEmbed()
+           .setColor("#42f4bc")
+           .addField("Você subiu de **nível"+level+"**!")
+           message.channel.send(Lembed);
+       }
+   }
+
+   //EXIT LEVEL_________
 
     if(!message.content.startsWith(config.prefix)) return;
 
