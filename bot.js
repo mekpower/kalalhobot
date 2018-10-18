@@ -120,10 +120,10 @@ client.on("message", async message => {
     
    //LEVEL SYSTEM
    let user = message.author;
-   
-   let exp = await db.fetch(`exp_${user.id}`);
+
+   let exp =  db.fetch(`exp_${user.id}`);
    if(exp === null) exp = 0;
-   let level = await db.fetch(`level_${user.id}`);
+   let level = db.fetch(`level_${user.id}`);
    if(level === null) level = 0;
    
    let nxtLevel = exp * 300;
@@ -141,8 +141,8 @@ client.on("message", async message => {
        if(xp >= nxtLevel){
            
            db.add(`level_${user.id}`, 1);
-           xp = await db.fetch(`exp_${user.id}`);
-           level = await db.fetch(`level_${user.id}`);
+           xp =  db.fetch(`exp_${user.id}`);
+           level = db.fetch(`level_${user.id}`);
            
            let Lembed = new Discord.RichEmbed()
            .setColor("#42f4bc")
